@@ -1,0 +1,15 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+      // The dts plugin uses this config to emit .d.ts files.
+      // Different settings from the main config for build-time only.
+      "declaration": true,
+      "emitDeclarationOnly": true,
+      "noEmit": false,
+      "outDir": "./dist"
+    },
+    // Only the library source ends up in dist/.
+    // Tests and examples are dev-only — they should never ship to npm.
+    "include": ["src"],
+    "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "**/__tests__/**"]
+  }
