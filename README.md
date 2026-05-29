@@ -8,7 +8,6 @@ A lightweight, TypeScript-first WebSocket library for React featuring hook-based
 - Message queue while disconnected, flushed on reconnect
 - Heartbeat / dead-connection detection
 - React Strict Mode safe
-- Framework-agnostic core (`WebSocketClient`) usable outside React
 
 ---
 
