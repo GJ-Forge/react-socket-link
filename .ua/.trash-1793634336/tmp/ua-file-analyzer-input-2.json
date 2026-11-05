@@ -1,8 +1,0 @@
-{"projectRoot":"C:/Users/jose_work/Documents/Developments/Misc/react-socket-link","batchFiles":[
-{"path":"src/core/index.ts","language":"typescript","sizeLines":6,"fileCategory":"code"},
-{"path":"src/index.ts","language":"typescript","sizeLines":13,"fileCategory":"code"},
-{"path":"tests/core.test.ts","language":"typescript","sizeLines":173,"fileCategory":"code"},
-{"path":"tests/helpers/MockWebSocket.ts","language":"typescript","sizeLines":37,"fileCategory":"code"},
-{"path":"tests/react.test.tsx","language":"typescript","sizeLines":112,"fileCategory":"code"},
-{"path":"tests/types.test.ts","language":"typescript","sizeLines":26,"fileCategory":"code"}],
-"batchImportData":{"src/core/index.ts":[],"src/index.ts":[],"tests/core.test.ts":["src/index.ts","tests/helpers/MockWebSocket.ts"],"tests/helpers/MockWebSocket.ts":[],"tests/react.test.tsx":["src/index.ts","tests/helpers/MockWebSocket.ts"],"tests/types.test.ts":["src/core/index.ts","src/index.ts"]}}

@@ -1,3 +1,0 @@
-Loaded 30 files (23 code).
-Info: compute-batches: merged 3 small batches (3 files) into 1 misc batches — singletons and orphans consolidated
-Wrote 5 batches (sizes: max=9, min=3) to C:\Users\jose_work\Documents\Developments\Misc\react-socket-link\.ua\intermediate\batches.json

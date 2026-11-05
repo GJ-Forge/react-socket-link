@@ -1,7 +1,0 @@
-{"projectRoot":"C:/Users/jose_work/Documents/Developments/Misc/react-socket-link","batchFiles":[
-{"path":"src/core/ConnectionOptions.ts","language":"typescript","sizeLines":100,"fileCategory":"code"},
-{"path":"src/core/ReconnectionPolicy.ts","language":"typescript","sizeLines":2,"fileCategory":"code"},
-{"path":"src/core/WebSocketTransport.ts","language":"typescript","sizeLines":90,"fileCategory":"code"},
-{"path":"src/react/useLocalSocket.ts","language":"typescript","sizeLines":36,"fileCategory":"code"},
-{"path":"src/utils/Backoff.ts","language":"typescript","sizeLines":26,"fileCategory":"code"}],
-"batchImportData":{"src/core/ConnectionOptions.ts":["src/core/ConnectionDefinition.ts","src/core/ReconnectionPolicy.ts"],"src/core/ReconnectionPolicy.ts":[],"src/core/WebSocketTransport.ts":["src/core/ConnectionDefinition.ts","src/core/ConnectionOptions.ts"],"src/react/useLocalSocket.ts":["src/core/ConnectionDefinition.ts","src/core/ConnectionOptions.ts","src/core/LogicalConnection.ts"],"src/utils/Backoff.ts":["src/core/ReconnectionPolicy.ts"]}}
