@@ -4,3 +4,13 @@ dist
 .DS_Store
 .vscode
 coverage
+.npmrc
+
+# Tooling
+.claude
+.codeboarding
+.agents
+docs/api/
+.npmrc
+.ua
+

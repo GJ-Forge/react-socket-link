@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "louvain",
+  "totalFiles": 16,
+  "totalBatches": 3,
+  "exportsByPath": {
+    ".npmrc": [],
+    "eslint.config.js": [],
+    "src/client/WebsocketClient.ts": [
+      "WebSocketClient"
+    ],
+    "src/context/WebSocketProvider.tsx": [
+      "WebSocketProvider",
+      "useWebSocketContext"
+    ],
+    "src/hooks/index.ts": [
+      "useWebSocket",
+      "useSubscription",
+      "useConnectionState",
+      "useSend",
+      "useCloseClient",
+      "useDynamicConnection"
+    ],
+    "src/index.ts": [
+      "WebSocketClient",
+      "WebSocketProvider",
+      "WebSocketProviderProps",
+      "ConnectionsConfig",
+      "ResolveConnection",
+      "useWebSocket",
+      "useSubscription",
+      "useConnectionState",
+      "useSend",
+      "useCloseClient",
+      "useDynamicConnection",
+      "ConnectionState",
+      "BaseMessage",
+      "MessageHandler",
+      "StateHandler",
+      "ErrorHandler",
+      "Unsubscribe",
+      "BackoffStrategy",
+      "WebSocketClientOptions",
+      "exponentialBackoff",
+      "fixedBackoff"
+    ],
+    "src/types/index.ts": [],
+    "src/utils/Backoff.ts": [
+      "exponentialBackoff",
+      "fixedBackoff"
+    ],
+    "vite.config.ts": []
+  },
+  "batches": [
+    {
+      "batchIndex": 1,
+      "files": [
+        {
+          "path": "src/client/WebsocketClient.ts",
+          "language": "typescript",
+          "sizeLines": 343,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/context/WebSocketProvider.tsx",
+          "language": "typescript",
+          "sizeLines": 213,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/hooks/index.ts",
+          "language": "typescript",
+          "sizeLines": 154,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/types/index.ts",
+          "language": "typescript",
+          "sizeLines": 94,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/utils/Backoff.ts",
+          "language": "typescript",
+          "sizeLines": 25,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "src/client/WebsocketClient.ts": [
+          "src/types/index.ts",
+          "src/utils/Backoff.ts"
+        ],
+        "src/context/WebSocketProvider.tsx": [
+          "src/client/WebsocketClient.ts",
+          "src/types/index.ts"
+        ],
+        "src/hooks/index.ts": [
+          "src/client/WebsocketClient.ts",
+          "src/context/WebSocketProvider.tsx",
+          "src/types/index.ts"
+        ],
+        "src/types/index.ts": [],
+        "src/utils/Backoff.ts": [
+          "src/types/index.ts"
+        ]
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 2,
+      "files": [
+        {
+          "path": "LICENSE.md",
+          "language": "markdown",
+          "sizeLines": 20,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "README.md",
+          "language": "markdown",
+          "sizeLines": 299,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "package.json",
+          "language": "json",
+          "sizeLines": 60,
+          "fileCategory": "config"
+        },
+        {
+          "path": "tsconfig.app.json",
+          "language": "json",
+          "sizeLines": 25,
+          "fileCategory": "config"
+        },
+        {
+          "path": "tsconfig.build.json",
+          "language": "json",
+          "sizeLines": 14,
+          "fileCategory": "config"
+        },
+        {
+          "path": "tsconfig.json",
+          "language": "json",
+          "sizeLines": 26,
+          "fileCategory": "config"
+        },
+        {
+          "path": "tsconfig.node.json",
+          "language": "json",
+          "sizeLines": 24,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        "LICENSE.md": [],
+        "README.md": [],
+        "package.json": [],
+        "tsconfig.app.json": [],
+        "tsconfig.build.json": [],
+        "tsconfig.json": [],
+        "tsconfig.node.json": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 3,
+      "files": [
+        {
+          "path": ".npmrc",
+          "language": "unknown",
+          "sizeLines": 0,
+          "fileCategory": "code"
+        },
+        {
+          "path": "eslint.config.js",
+          "language": "javascript",
+          "sizeLines": 22,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/index.ts",
+          "language": "typescript",
+          "sizeLines": 32,
+          "fileCategory": "code"
+        },
+        {
+          "path": "vite.config.ts",
+          "language": "typescript",
+          "sizeLines": 28,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        ".npmrc": [],
+        "eslint.config.js": [],
+        "src/index.ts": [],
+        "vite.config.ts": []
+      },
+      "neighborMap": {}
+    }
+  ]
+}

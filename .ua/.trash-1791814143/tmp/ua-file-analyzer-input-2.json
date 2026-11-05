@@ -1,0 +1,9 @@
+{"projectRoot":"C:/Users/jose_work/Documents/Developments/Misc/react-socket-link","batchFiles":[
+{"path":"LICENSE.md","language":"markdown","sizeLines":20,"fileCategory":"docs"},
+{"path":"README.md","language":"markdown","sizeLines":299,"fileCategory":"docs"},
+{"path":"package.json","language":"json","sizeLines":60,"fileCategory":"config"},
+{"path":"tsconfig.app.json","language":"json","sizeLines":25,"fileCategory":"config"},
+{"path":"tsconfig.build.json","language":"json","sizeLines":14,"fileCategory":"config"},
+{"path":"tsconfig.json","language":"json","sizeLines":26,"fileCategory":"config"},
+{"path":"tsconfig.node.json","language":"json","sizeLines":24,"fileCategory":"config"}],
+"batchImportData":{"LICENSE.md":[],"README.md":[],"package.json":[],"tsconfig.app.json":[],"tsconfig.build.json":[],"tsconfig.json":[],"tsconfig.node.json":[]}}

@@ -1,0 +1,527 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 6,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 6,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 6,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "src/core/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "defineSocket",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "BaseMessage",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "SocketDefinition",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "createSocket",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "LogicalConnection",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "SocketView",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "SocketController",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "SendResult",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "MessageOf",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "Unsubscribe",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "SocketOptions",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "SocketOptionsPatch",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "HeartbeatOptions",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "ReconnectOptions",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "QueueOptions",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "MessageCodec",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "ConnectionSnapshot",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "SocketStatus",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "SocketError",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "SocketErrorCode",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "exponentialBackoff",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "fixedBackoff",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "BackoffStrategy",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 23,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 13,
+      "exports": [
+        {
+          "name": "defineSocket",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "BaseMessage",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "SocketDefinition",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "createSocket",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "LogicalConnection",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "SocketView",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "SocketController",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "SendResult",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "MessageOf",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "Unsubscribe",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "SocketOptions",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "SocketOptionsPatch",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "HeartbeatOptions",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "ReconnectOptions",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "QueueOptions",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "MessageCodec",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "WebSocketData",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "ConnectionSnapshot",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "SocketStatus",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "SocketError",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "SocketErrorCode",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "SocketProvider",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "registerSocket",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "SocketProviderProps",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "SocketRegistration",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "useGlobalSocket",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "useGlobalSocketController",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "useLocalSocket",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "LocalSocketOptions",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "useSocketState",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "useSocketEvent",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "useSocketSend",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "exponentialBackoff",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "fixedBackoff",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "BackoffStrategy",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 35,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/core.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 173,
+      "nonEmptyLines": 162,
+      "functions": [
+        {
+          "name": "tick",
+          "startLine": 8,
+          "endLine": 8,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "tick",
+          "callee": "Promise.resolve",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/helpers/MockWebSocket.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 30,
+      "classes": [
+        {
+          "name": "MockWebSocket",
+          "startLine": 1,
+          "endLine": 37,
+          "methods": [
+            "constructor",
+            "open",
+            "message",
+            "fail",
+            "send",
+            "close"
+          ],
+          "properties": [
+            "CONNECTING",
+            "OPEN",
+            "CLOSING",
+            "CLOSED",
+            "instances",
+            "readyState",
+            "sent",
+            "closeCalls"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MockWebSocket",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 13
+        },
+        {
+          "caller": "constructor",
+          "callee": "MockWebSocket.instances.push",
+          "lineNumber": 14
+        },
+        {
+          "caller": "open",
+          "callee": "this.dispatchEvent",
+          "lineNumber": 19
+        },
+        {
+          "caller": "message",
+          "callee": "this.dispatchEvent",
+          "lineNumber": 23
+        },
+        {
+          "caller": "fail",
+          "callee": "this.dispatchEvent",
+          "lineNumber": 28
+        },
+        {
+          "caller": "send",
+          "callee": "this.sent.push",
+          "lineNumber": 31
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "tests/react.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 112,
+      "nonEmptyLines": 105,
+      "callGraph": [
+        {
+          "caller": "Consumer",
+          "callee": "useGlobalSocket",
+          "lineNumber": 35
+        },
+        {
+          "caller": "Consumer",
+          "callee": "useSocketState",
+          "lineNumber": 36
+        },
+        {
+          "caller": "Consumer",
+          "callee": "useSocketEvent",
+          "lineNumber": 37
+        },
+        {
+          "caller": "Consumer",
+          "callee": "received.push",
+          "lineNumber": 37
+        },
+        {
+          "caller": "Control",
+          "callee": "useGlobalSocketController",
+          "lineNumber": 42
+        },
+        {
+          "caller": "Local",
+          "callee": "useLocalSocket",
+          "lineNumber": 64
+        },
+        {
+          "caller": "Local",
+          "callee": "handles.push",
+          "lineNumber": 68
+        },
+        {
+          "caller": "Local",
+          "callee": "useSocketState",
+          "lineNumber": 69
+        },
+        {
+          "caller": "Local",
+          "callee": "useLocalSocket",
+          "lineNumber": 87
+        },
+        {
+          "caller": "Local",
+          "callee": "useLocalSocket",
+          "lineNumber": 100
+        },
+        {
+          "caller": "Local",
+          "callee": "handles.push",
+          "lineNumber": 103
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/types.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 26,
+      "nonEmptyLines": 24,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

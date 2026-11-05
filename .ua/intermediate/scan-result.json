@@ -1,0 +1,282 @@
+{
+  "name": "react-socket-link",
+  "description": "Typed WebSocket connection management for React 18+ and standalone TypeScript, where a socket definition fixes incoming and outgoing message types. Logical connections keep their identity, state, queue, and subscriptions while replaceable native WebSockets handle transport, and a react-free core entry point is exposed.",
+  "languages": [
+    "javascript",
+    "json",
+    "markdown",
+    "typescript"
+  ],
+  "frameworks": [
+    "React",
+    "TypeScript",
+    "Vite",
+    "Vitest"
+  ],
+  "files": [
+    {
+      "path": ".npmrc",
+      "language": "unknown",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "LICENSE.md",
+      "language": "markdown",
+      "sizeLines": 20,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "sizeLines": 138,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "eslint.config.js",
+      "language": "javascript",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "package.json",
+      "language": "json",
+      "sizeLines": 68,
+      "fileCategory": "config"
+    },
+    {
+      "path": "src/core/ConnectionDefinition.ts",
+      "language": "typescript",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/core/ConnectionOptions.ts",
+      "language": "typescript",
+      "sizeLines": 100,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/core/ConnectionState.ts",
+      "language": "typescript",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/core/LogicalConnection.ts",
+      "language": "typescript",
+      "sizeLines": 296,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/core/ReconnectionPolicy.ts",
+      "language": "typescript",
+      "sizeLines": 2,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/core/WebSocketTransport.ts",
+      "language": "typescript",
+      "sizeLines": 90,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/core/index.ts",
+      "language": "typescript",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/index.ts",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/react/SocketProvider.tsx",
+      "language": "typescript",
+      "sizeLines": 64,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/react/useGlobalSocket.ts",
+      "language": "typescript",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/react/useGlobalSocketController.ts",
+      "language": "typescript",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/react/useLocalSocket.ts",
+      "language": "typescript",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/react/useSocketEvent.ts",
+      "language": "typescript",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/react/useSocketSend.ts",
+      "language": "typescript",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/react/useSocketState.ts",
+      "language": "typescript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/utils/Backoff.ts",
+      "language": "typescript",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "tests/core.test.ts",
+      "language": "typescript",
+      "sizeLines": 173,
+      "fileCategory": "code"
+    },
+    {
+      "path": "tests/helpers/MockWebSocket.ts",
+      "language": "typescript",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "tests/react.test.tsx",
+      "language": "typescript",
+      "sizeLines": 112,
+      "fileCategory": "code"
+    },
+    {
+      "path": "tests/types.test.ts",
+      "language": "typescript",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "tsconfig.app.json",
+      "language": "json",
+      "sizeLines": 25,
+      "fileCategory": "config"
+    },
+    {
+      "path": "tsconfig.build.json",
+      "language": "json",
+      "sizeLines": 15,
+      "fileCategory": "config"
+    },
+    {
+      "path": "tsconfig.json",
+      "language": "json",
+      "sizeLines": 26,
+      "fileCategory": "config"
+    },
+    {
+      "path": "tsconfig.node.json",
+      "language": "json",
+      "sizeLines": 24,
+      "fileCategory": "config"
+    },
+    {
+      "path": "vite.config.ts",
+      "language": "typescript",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    }
+  ],
+  "totalFiles": 30,
+  "filteredByIgnore": 4,
+  "estimatedComplexity": "small",
+  "importMap": {
+    ".npmrc": [],
+    "LICENSE.md": [],
+    "README.md": [],
+    "eslint.config.js": [],
+    "package.json": [],
+    "src/core/ConnectionDefinition.ts": [],
+    "src/core/ConnectionOptions.ts": [
+      "src/core/ConnectionDefinition.ts",
+      "src/core/ReconnectionPolicy.ts"
+    ],
+    "src/core/ConnectionState.ts": [],
+    "src/core/LogicalConnection.ts": [
+      "src/core/ConnectionDefinition.ts",
+      "src/core/ConnectionOptions.ts",
+      "src/core/ConnectionState.ts",
+      "src/core/WebSocketTransport.ts",
+      "src/utils/Backoff.ts"
+    ],
+    "src/core/ReconnectionPolicy.ts": [],
+    "src/core/WebSocketTransport.ts": [
+      "src/core/ConnectionDefinition.ts",
+      "src/core/ConnectionOptions.ts"
+    ],
+    "src/core/index.ts": [],
+    "src/index.ts": [],
+    "src/react/SocketProvider.tsx": [
+      "src/core/ConnectionDefinition.ts",
+      "src/core/ConnectionOptions.ts",
+      "src/core/LogicalConnection.ts"
+    ],
+    "src/react/useGlobalSocket.ts": [
+      "src/core/ConnectionDefinition.ts",
+      "src/core/LogicalConnection.ts",
+      "src/react/SocketProvider.tsx"
+    ],
+    "src/react/useGlobalSocketController.ts": [
+      "src/core/ConnectionDefinition.ts",
+      "src/core/LogicalConnection.ts",
+      "src/react/SocketProvider.tsx"
+    ],
+    "src/react/useLocalSocket.ts": [
+      "src/core/ConnectionDefinition.ts",
+      "src/core/ConnectionOptions.ts",
+      "src/core/LogicalConnection.ts"
+    ],
+    "src/react/useSocketEvent.ts": [
+      "src/core/ConnectionDefinition.ts",
+      "src/core/LogicalConnection.ts"
+    ],
+    "src/react/useSocketSend.ts": [
+      "src/core/ConnectionDefinition.ts",
+      "src/core/LogicalConnection.ts"
+    ],
+    "src/react/useSocketState.ts": [
+      "src/core/ConnectionDefinition.ts",
+      "src/core/ConnectionState.ts",
+      "src/core/LogicalConnection.ts"
+    ],
+    "src/utils/Backoff.ts": [
+      "src/core/ReconnectionPolicy.ts"
+    ],
+    "tests/core.test.ts": [
+      "src/index.ts",
+      "tests/helpers/MockWebSocket.ts"
+    ],
+    "tests/helpers/MockWebSocket.ts": [],
+    "tests/react.test.tsx": [
+      "src/index.ts",
+      "tests/helpers/MockWebSocket.ts"
+    ],
+    "tests/types.test.ts": [
+      "src/core/index.ts",
+      "src/index.ts"
+    ],
+    "tsconfig.app.json": [],
+    "tsconfig.build.json": [],
+    "tsconfig.json": [],
+    "tsconfig.node.json": [],
+    "vite.config.ts": []
+  }
+}

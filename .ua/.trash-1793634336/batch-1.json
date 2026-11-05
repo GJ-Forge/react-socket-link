@@ -1,0 +1,711 @@
+{
+ "nodes": [
+  {
+   "id": "file:src/core/ConnectionDefinition.ts",
+   "type": "file",
+   "name": "ConnectionDefinition.ts",
+   "filePath": "src/core/ConnectionDefinition.ts",
+   "summary": "Declares the BaseMessage contract and the SocketDefinition identity/type token, plus defineSocket to create frozen, symbol-identified definitions that never open a socket.",
+   "tags": [
+    "type-definition",
+    "factory",
+    "protocol-typing",
+    "core"
+   ],
+   "complexity": "simple",
+   "languageNotes": "Uses an optional phantom function-typed property (__messages) to make Incoming/Outgoing generics invariant so distinct protocols cannot be interchanged."
+  },
+  {
+   "id": "function:src/core/ConnectionDefinition.ts:defineSocket",
+   "type": "function",
+   "name": "defineSocket",
+   "filePath": "src/core/ConnectionDefinition.ts",
+   "lineRange": [
+    13,
+    18
+   ],
+   "summary": "Validates a non-empty name and returns a frozen SocketDefinition carrying a unique Symbol id typed with incoming/outgoing message generics.",
+   "tags": [
+    "factory",
+    "validation",
+    "type-token"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:src/core/ConnectionState.ts",
+   "type": "file",
+   "name": "ConnectionState.ts",
+   "filePath": "src/core/ConnectionState.ts",
+   "summary": "Defines connection status and error-code union types, the SocketError and ConnectionSnapshot shapes, and a snapshot factory for immutable state objects.",
+   "tags": [
+    "type-definition",
+    "state",
+    "data-model",
+    "core"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:src/core/ConnectionState.ts:snapshot",
+   "type": "function",
+   "name": "snapshot",
+   "filePath": "src/core/ConnectionState.ts",
+   "lineRange": [
+    18,
+    20
+   ],
+   "summary": "Builds a frozen ConnectionSnapshot from status, reconnect attempt and last error, deriving isConnected from OPEN status.",
+   "tags": [
+    "factory",
+    "state",
+    "immutability"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:src/core/LogicalConnection.ts",
+   "type": "file",
+   "name": "LogicalConnection.ts",
+   "filePath": "src/core/LogicalConnection.ts",
+   "summary": "Core logical connection implementation: a stable identity that owns retry policy, outgoing queue, message/state subscriptions and open-waiters while swapping replaceable WebSocketTransport instances underneath. Also defines the SocketView/SocketController interfaces and the createSocket factory.",
+   "tags": [
+    "service",
+    "core",
+    "state-machine",
+    "reconnection",
+    "websocket"
+   ],
+   "complexity": "complex",
+   "languageNotes": "Uses a monotonically increasing generation counter plus queueMicrotask coalescing to ignore stale transport callbacks and avoid allocating sockets for superseded attempts; arrow-function class fields keep getSnapshot/subscribeState referentially stable for useSyncExternalStore."
+  },
+  {
+   "id": "class:src/core/LogicalConnection.ts:LogicalConnection",
+   "type": "class",
+   "name": "LogicalConnection",
+   "filePath": "src/core/LogicalConnection.ts",
+   "lineRange": [
+    29,
+    290
+   ],
+   "summary": "Stateful connection controller implementing SocketController: manages connect/reconnect/update/close/dispose lifecycle, exponential-backoff retries, a bounded send queue flushed on open, typed per-message-type subscriptions, state listeners and whenOpen promises.",
+   "tags": [
+    "service",
+    "state-machine",
+    "reconnection",
+    "pub-sub",
+    "queue"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:src/core/LogicalConnection.ts:createSocket",
+   "type": "function",
+   "name": "createSocket",
+   "filePath": "src/core/LogicalConnection.ts",
+   "lineRange": [
+    292,
+    296
+   ],
+   "summary": "Factory that constructs a new LogicalConnection for a definition and options.",
+   "tags": [
+    "factory",
+    "entry-point",
+    "core"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:src/react/SocketProvider.tsx",
+   "type": "file",
+   "name": "SocketProvider.tsx",
+   "filePath": "src/react/SocketProvider.tsx",
+   "summary": "React context provider that eagerly creates a registry of LogicalConnections from socket registrations, connects them on mount, and disposes them on unmount in a Strict-Mode-safe way; also exposes registerSocket and useProviderSocket.",
+   "tags": [
+    "component",
+    "context-provider",
+    "react",
+    "lifecycle"
+   ],
+   "complexity": "moderate",
+   "languageNotes": "Deferred disposal via queueMicrotask plus a lifecycle version ref lets the Strict Mode double effect invocation reuse the same instances instead of destroying them."
+  },
+  {
+   "id": "function:src/react/SocketProvider.tsx:registerSocket",
+   "type": "function",
+   "name": "registerSocket",
+   "filePath": "src/react/SocketProvider.tsx",
+   "lineRange": [
+    12,
+    16
+   ],
+   "summary": "Typed helper that pairs a socket definition with matching options so types are bound before erasure in a heterogeneous registration list.",
+   "tags": [
+    "utility",
+    "type-safety",
+    "registration"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:src/react/SocketProvider.tsx:SocketProvider",
+   "type": "function",
+   "name": "SocketProvider",
+   "filePath": "src/react/SocketProvider.tsx",
+   "lineRange": [
+    26,
+    54
+   ],
+   "summary": "Provider component building a symbol-keyed registry of logical connections (rejecting duplicates), connecting all on mount and closing then conditionally disposing them on cleanup.",
+   "tags": [
+    "component",
+    "context-provider",
+    "lifecycle",
+    "react"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:src/react/SocketProvider.tsx:useProviderSocket",
+   "type": "function",
+   "name": "useProviderSocket",
+   "filePath": "src/react/SocketProvider.tsx",
+   "lineRange": [
+    56,
+    64
+   ],
+   "summary": "Hook that reads the provider registry and returns the LogicalConnection registered for a definition, throwing if the provider or registration is missing.",
+   "tags": [
+    "hook",
+    "context",
+    "lookup"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:src/react/useGlobalSocket.ts",
+   "type": "file",
+   "name": "useGlobalSocket.ts",
+   "filePath": "src/react/useGlobalSocket.ts",
+   "summary": "Hook returning the read/send SocketView of a provider-registered global socket for a given definition.",
+   "tags": [
+    "hook",
+    "react",
+    "facade"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:src/react/useGlobalSocket.ts:useGlobalSocket",
+   "type": "function",
+   "name": "useGlobalSocket",
+   "filePath": "src/react/useGlobalSocket.ts",
+   "lineRange": [
+    5,
+    9
+   ],
+   "summary": "Returns the provider-managed connection narrowed to the SocketView interface (send, subscribe, state, whenOpen).",
+   "tags": [
+    "hook",
+    "facade",
+    "type-narrowing"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:src/react/useGlobalSocketController.ts",
+   "type": "file",
+   "name": "useGlobalSocketController.ts",
+   "filePath": "src/react/useGlobalSocketController.ts",
+   "summary": "Hook returning the full SocketController (connect/reconnect/update/close) for a provider-registered global socket.",
+   "tags": [
+    "hook",
+    "react",
+    "facade"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:src/react/useGlobalSocketController.ts:useGlobalSocketController",
+   "type": "function",
+   "name": "useGlobalSocketController",
+   "filePath": "src/react/useGlobalSocketController.ts",
+   "lineRange": [
+    5,
+    9
+   ],
+   "summary": "Returns the provider-managed connection typed as a SocketController, granting lifecycle control to the caller.",
+   "tags": [
+    "hook",
+    "facade",
+    "controller"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:src/react/useSocketEvent.ts",
+   "type": "file",
+   "name": "useSocketEvent.ts",
+   "filePath": "src/react/useSocketEvent.ts",
+   "summary": "Hook subscribing a handler to a typed message type (or wildcard) on a socket, keeping the latest handler in a ref to avoid resubscription.",
+   "tags": [
+    "hook",
+    "react",
+    "event-handler",
+    "subscription"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:src/react/useSocketEvent.ts:useSocketEvent",
+   "type": "function",
+   "name": "useSocketEvent",
+   "filePath": "src/react/useSocketEvent.ts",
+   "lineRange": [
+    5,
+    11
+   ],
+   "summary": "Subscribes to messages of a given type via socket.subscribe in an effect, forwarding to the latest handler stored in a ref and unsubscribing on cleanup.",
+   "tags": [
+    "hook",
+    "event-handler",
+    "subscription"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:src/react/useSocketSend.ts",
+   "type": "file",
+   "name": "useSocketSend.ts",
+   "filePath": "src/react/useSocketSend.ts",
+   "summary": "Hook producing a memoized send function bound to a socket.",
+   "tags": [
+    "hook",
+    "react",
+    "messaging"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:src/react/useSocketSend.ts:useSocketSend",
+   "type": "function",
+   "name": "useSocketSend",
+   "filePath": "src/react/useSocketSend.ts",
+   "lineRange": [
+    5,
+    9
+   ],
+   "summary": "Returns a useCallback-memoized function that sends an outgoing message through the socket and yields its SendResult.",
+   "tags": [
+    "hook",
+    "messaging",
+    "memoization"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:src/react/useSocketState.ts",
+   "type": "file",
+   "name": "useSocketState.ts",
+   "filePath": "src/react/useSocketState.ts",
+   "summary": "Hook exposing a socket's ConnectionSnapshot to React via useSyncExternalStore.",
+   "tags": [
+    "hook",
+    "react",
+    "state",
+    "external-store"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:src/react/useSocketState.ts:useSocketState",
+   "type": "function",
+   "name": "useSocketState",
+   "filePath": "src/react/useSocketState.ts",
+   "lineRange": [
+    6,
+    10
+   ],
+   "summary": "Binds socket.subscribeState and getSnapshot to useSyncExternalStore for tear-free connection state reads.",
+   "tags": [
+    "hook",
+    "state",
+    "external-store"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:src/core/ConnectionDefinition.ts",
+   "target": "function:src/core/ConnectionDefinition.ts:defineSocket",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/core/ConnectionDefinition.ts",
+   "target": "function:src/core/ConnectionDefinition.ts:defineSocket",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/core/ConnectionState.ts",
+   "target": "function:src/core/ConnectionState.ts:snapshot",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/core/ConnectionState.ts",
+   "target": "function:src/core/ConnectionState.ts:snapshot",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/core/LogicalConnection.ts",
+   "target": "class:src/core/LogicalConnection.ts:LogicalConnection",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/core/LogicalConnection.ts",
+   "target": "class:src/core/LogicalConnection.ts:LogicalConnection",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/core/LogicalConnection.ts",
+   "target": "function:src/core/LogicalConnection.ts:createSocket",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/core/LogicalConnection.ts",
+   "target": "function:src/core/LogicalConnection.ts:createSocket",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/react/SocketProvider.tsx",
+   "target": "function:src/react/SocketProvider.tsx:registerSocket",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/react/SocketProvider.tsx",
+   "target": "function:src/react/SocketProvider.tsx:registerSocket",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/react/SocketProvider.tsx",
+   "target": "function:src/react/SocketProvider.tsx:SocketProvider",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/react/SocketProvider.tsx",
+   "target": "function:src/react/SocketProvider.tsx:SocketProvider",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/react/SocketProvider.tsx",
+   "target": "function:src/react/SocketProvider.tsx:useProviderSocket",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/react/SocketProvider.tsx",
+   "target": "function:src/react/SocketProvider.tsx:useProviderSocket",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/react/useGlobalSocket.ts",
+   "target": "function:src/react/useGlobalSocket.ts:useGlobalSocket",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/react/useGlobalSocket.ts",
+   "target": "function:src/react/useGlobalSocket.ts:useGlobalSocket",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/react/useGlobalSocketController.ts",
+   "target": "function:src/react/useGlobalSocketController.ts:useGlobalSocketController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/react/useGlobalSocketController.ts",
+   "target": "function:src/react/useGlobalSocketController.ts:useGlobalSocketController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/react/useSocketEvent.ts",
+   "target": "function:src/react/useSocketEvent.ts:useSocketEvent",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/react/useSocketEvent.ts",
+   "target": "function:src/react/useSocketEvent.ts:useSocketEvent",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/react/useSocketSend.ts",
+   "target": "function:src/react/useSocketSend.ts:useSocketSend",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/react/useSocketSend.ts",
+   "target": "function:src/react/useSocketSend.ts:useSocketSend",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/react/useSocketState.ts",
+   "target": "function:src/react/useSocketState.ts:useSocketState",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/react/useSocketState.ts",
+   "target": "function:src/react/useSocketState.ts:useSocketState",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/core/LogicalConnection.ts",
+   "target": "file:src/core/ConnectionDefinition.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/core/LogicalConnection.ts",
+   "target": "file:src/core/ConnectionOptions.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/core/LogicalConnection.ts",
+   "target": "file:src/core/ConnectionState.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/core/LogicalConnection.ts",
+   "target": "file:src/core/WebSocketTransport.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/core/LogicalConnection.ts",
+   "target": "file:src/utils/Backoff.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/SocketProvider.tsx",
+   "target": "file:src/core/ConnectionDefinition.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/SocketProvider.tsx",
+   "target": "file:src/core/ConnectionOptions.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/SocketProvider.tsx",
+   "target": "file:src/core/LogicalConnection.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/useGlobalSocket.ts",
+   "target": "file:src/core/ConnectionDefinition.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/useGlobalSocket.ts",
+   "target": "file:src/core/LogicalConnection.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/useGlobalSocket.ts",
+   "target": "file:src/react/SocketProvider.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/useGlobalSocketController.ts",
+   "target": "file:src/core/ConnectionDefinition.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/useGlobalSocketController.ts",
+   "target": "file:src/core/LogicalConnection.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/useGlobalSocketController.ts",
+   "target": "file:src/react/SocketProvider.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/useSocketEvent.ts",
+   "target": "file:src/core/ConnectionDefinition.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/useSocketEvent.ts",
+   "target": "file:src/core/LogicalConnection.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/useSocketSend.ts",
+   "target": "file:src/core/ConnectionDefinition.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/useSocketSend.ts",
+   "target": "file:src/core/LogicalConnection.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/useSocketState.ts",
+   "target": "file:src/core/ConnectionDefinition.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/useSocketState.ts",
+   "target": "file:src/core/ConnectionState.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/useSocketState.ts",
+   "target": "file:src/core/LogicalConnection.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "class:src/core/LogicalConnection.ts:LogicalConnection",
+   "target": "function:src/core/ConnectionState.ts:snapshot",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:src/core/LogicalConnection.ts:LogicalConnection",
+   "target": "function:src/core/ConnectionOptions.ts:validateOptions",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:src/core/LogicalConnection.ts:LogicalConnection",
+   "target": "function:src/core/ConnectionOptions.ts:mergeOptions",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:src/core/LogicalConnection.ts:LogicalConnection",
+   "target": "function:src/utils/Backoff.ts:exponentialBackoff",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:src/core/LogicalConnection.ts:LogicalConnection",
+   "target": "class:src/core/WebSocketTransport.ts:WebSocketTransport",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "function:src/react/SocketProvider.tsx:SocketProvider",
+   "target": "function:src/core/LogicalConnection.ts:createSocket",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:src/react/useGlobalSocket.ts:useGlobalSocket",
+   "target": "function:src/react/SocketProvider.tsx:useProviderSocket",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:src/react/useGlobalSocketController.ts:useGlobalSocketController",
+   "target": "function:src/react/SocketProvider.tsx:useProviderSocket",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

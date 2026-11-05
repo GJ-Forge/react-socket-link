@@ -1,0 +1,11 @@
+{
+  "entryPoints": ["src/index.ts", "src/core/index.ts"],
+  "entryPointStrategy": "resolve",
+  "tsconfig": "tsconfig.build.json",
+  "out": "docs/api",
+  "excludeInternal": true,
+  "excludePrivate": true,
+  "validation": {
+    "notDocumented": true
+  }
+}

@@ -1,0 +1,3 @@
+const b=require("../intermediate/batches.json");const e=b.batches.find(x=>x.batchIndex===1);
+const files=[["src/core/ConnectionDefinition.ts",18],["src/core/ConnectionState.ts",20],["src/core/LogicalConnection.ts",296],["src/react/SocketProvider.tsx",64],["src/react/useGlobalSocket.ts",9],["src/react/useGlobalSocketController.ts",9],["src/react/useSocketEvent.ts",11],["src/react/useSocketSend.ts",9],["src/react/useSocketState.ts",10]].map(([p,n])=>({path:p,language:"typescript",sizeLines:n,fileCategory:"code"}));
+require("fs").writeFileSync(__dirname+"/ua-file-analyzer-input-1.json",JSON.stringify({projectRoot:"C:/Users/jose_work/Documents/Developments/Misc/react-socket-link",batchFiles:files,batchImportData:e.batchImportData}));

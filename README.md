@@ -1,299 +1,140 @@
-# react-socket-link
+# react-socket-link v1.0
 
-A lightweight, TypeScript-first WebSocket library for React featuring hook-based APIs, automatic reconnection with exponential backoff, typed pub/sub messaging, and flexible multi-connection management.
+For the locally generated API reference and comment guidelines, see [Documentation](docs/README.md).
 
-- Named connections — `useSubscription('chat', ...)`, `useSend('notifications')`
-- Static connections (known at startup) and dynamic ones (pattern-based, resolved at runtime)
-- Auto-reconnect with exponential backoff and full jitter
-- Message queue while disconnected, flushed on reconnect
-- Heartbeat / dead-connection detection
-- React Strict Mode safe
+Typed WebSocket connection management for React 18+ and standalone TypeScript services. A socket **definition** fixes incoming and outgoing message types. A **logical connection** keeps its identity, state, queue, and subscriptions while replaceable native WebSockets handle the actual transport.
 
----
-
-## Installation
+## Install
 
 ```bash
 npm install react-socket-link
 ```
 
----
+React consumers need React 18 or newer. Standalone consumers can import `react-socket-link/core` without installing React. The package does not open a WebSocket at import time or during React render.
 
-## Quick start
+## Define a protocol
 
-**1. Wrap your app with `WebSocketProvider`**
+```ts
+import { defineSocket } from 'react-socket-link';
+
+type Incoming =
+  | { type: 'notification'; payload: { text: string } }
+  | { type: 'count'; payload: number };
+type Outgoing = { type: 'mark-read'; payload: string };
+
+export const notifications = defineSocket<Incoming, Outgoing>('notifications');
+```
+
+Definitions are reusable identity tokens. Create them outside components and reuse the same object wherever you refer to a global connection.
+
+## Global React connection
 
 ```tsx
-import { WebSocketProvider } from 'react-socket-link';
+import { useEffect, useRef } from 'react';
+import {
+  SocketProvider, registerSocket, useGlobalSocket, useGlobalSocketController,
+  useLocalSocket, useSocketEvent, useSocketSend, useSocketState,
+} from 'react-socket-link';
 
-function App() {
+function AuthenticatedApp({ token }: { token: string }) {
   return (
-    <WebSocketProvider
-      connections={{
-        chat: { url: 'wss://api.example.com/chat' },
-        notifications: { url: 'wss://api.example.com/notifications' },
-      }}
-    >
-      <YourApp />
-    </WebSocketProvider>
+    <SocketProvider connections={[
+      registerSocket(notifications, { url: `wss://example.com/notifications?token=${token}` }),
+    ]}>
+      <Notifications />
+      <TokenUpdater token={token} />
+    </SocketProvider>
   );
 }
-```
 
-**2. Subscribe to messages in any component**
-
-```tsx
-import { useSubscription, useSend } from 'react-socket-link';
-
-function ChatBox() {
-  const send = useSend('chat');
-
-  useSubscription('chat', '*', (message) => {
-    console.log('received', message);
+function Notifications() {
+  const socket = useGlobalSocket(notifications); // shared view; no lifecycle commands
+  const { status, lastError } = useSocketState(socket);
+  const send = useSocketSend(socket);
+  useSocketEvent(socket, 'notification', message => {
+    console.log(message.payload.text); // narrowed to the notification variant
   });
+  return <button disabled={status !== 'OPEN'} onClick={() => send({ type: 'mark-read', payload: '123' })}>
+    {lastError?.message ?? status}
+  </button>;
+}
 
-  return <button onClick={() => send({ type: 'hello', payload: 'world' })}>Send</button>;
+function TokenUpdater({ token }: { token: string }) {
+  const socket = useGlobalSocketController(notifications);
+  const previousToken = useRef(token);
+  useEffect(() => {
+    if (previousToken.current === token) return;
+    previousToken.current = token;
+    socket.update({ url: `wss://example.com/notifications?token=${token}` });
+  }, [socket, token]);
+  return null;
 }
 ```
 
----
+The Provider creates and activates each configured connection on mount, whether or not a child consumes it. Multiple consumers of the same definition share one logical connection. The Provider closes and disposes its connections on unmount.
 
-## Typing your messages
-
-Extend `BaseMessage` with a discriminated union to get exhaustive type checking in subscribers:
-
-```ts
-import type { BaseMessage } from 'react-socket-link';
-
-type ChatMessage =
-  | { type: 'chat';     payload: { user: string; text: string } }
-  | { type: 'presence'; payload: { user: string; online: boolean } };
-```
-
-Then pass the type to hooks:
+## Local React connection
 
 ```tsx
-useSubscription<ChatMessage>('chat', 'chat', (msg) => {
-  // msg is typed as { type: 'chat'; payload: { user: string; text: string } }
-  console.log(msg.payload.text);
-});
-```
+const questionDefinition = defineSocket<Incoming, Outgoing>('question');
 
-Using `'*'` as the event type receives every message as the full union:
-
-```tsx
-useSubscription<ChatMessage>('chat', '*', (msg) => {
-  // msg is ChatMessage — switch on msg.type for exhaustive handling
-});
-```
-
----
-
-## Provider
-
-### Static connections
-
-Static connections are known at startup. Each key is the name you'll reference from hooks.
-
-```tsx
-<WebSocketProvider
-  connections={{
-    general:       { url: 'wss://api.example.com/ws?type=general' },
-    chat:          { url: 'wss://api.example.com/ws?type=chat' },
-    notifications: { url: 'wss://api.example.com/ws?type=notifications', autoConnect: false },
-  }}
->
-  {children}
-</WebSocketProvider>
-```
-
-### Dynamic connections
-
-Use the `resolve` prop for connections whose URLs depend on runtime values (room IDs, document IDs, etc.). It is called the first time a hook requests a name that isn't in the static map.
-
-```tsx
-<WebSocketProvider
-  connections={{ general: { url: '...' } }}
-  resolve={(name) => {
-    if (name.startsWith('room:')) {
-      const id = name.slice(5);
-      return { url: `wss://api.example.com/rooms/${id}` };
-    }
-    return null; // not handled — provider will throw a clear error
-  }}
->
-  {children}
-</WebSocketProvider>
-```
-
-Return `null` or `undefined` for names your resolver doesn't handle. The provider throws a descriptive error rather than silently creating a broken connection.
-
-### Global error handler
-
-Pass `onError` to capture errors from every connection (static and dynamic) in one place:
-
-```tsx
-<WebSocketProvider
-  connections={connections}
-  resolve={resolveConnection}
-  onError={(name, event) => {
-    captureError(event, { tags: { connection: name } });
-  }}
->
-  {children}
-</WebSocketProvider>
-```
-
-The `name` argument is the connection name (`'chat'`, `'room:42'`, etc.).
-
----
-
-## Hooks
-
-### `useSubscription`
-
-Subscribe to messages on a connection. Re-subscribes only when the connection name or message type changes — inline handler functions are safe to pass without causing churn.
-
-```tsx
-useSubscription<ChatMessage>('chat', 'chat', (msg) => {
-  console.log(msg.payload.text);
-});
-
-// Subscribe to all message types
-useSubscription<ChatMessage>('chat', '*', (msg) => {
-  switch (msg.type) { ... }
-});
-```
-
-### `useSend`
-
-Returns a stable `send` function. Returns `true` if sent immediately, `false` if queued (when `queueWhileDisconnected` is enabled).
-
-```tsx
-const send = useSend<ChatMessage>('chat');
-send({ type: 'chat', payload: { user: 'alice', text: 'hello' } });
-```
-
-### `useConnectionState`
-
-Tracks the connection state as React state — triggers a re-render on each transition.
-
-```tsx
-import { ConnectionState, useConnectionState } from 'react-socket-link';
-
-const state = useConnectionState('chat');
-// ConnectionState.CONNECTING | OPEN | CLOSING | CLOSED | RECONNECTING
-```
-
-### `useWebSocket`
-
-Returns the raw `WebSocketClient` instance. Use this when you need direct access — for example, to set up a per-component error handler:
-
-```tsx
-const client = useWebSocket('chat');
-
-useEffect(() => client.onError((event) => {
-  console.error('chat error', event);
-}), [client]);
-```
-
-### `useDynamicConnection`
-
-Manages a single dynamic connection that follows an ID. When the ID changes, the previous connection is closed and a new one is opened. On unmount, the active connection is closed automatically.
-
-```tsx
-function Room({ roomId }: { roomId: string | null }) {
-  // Returns 'room:42' when roomId is '42', null when roomId is null
-  const connectionName = useDynamicConnection('room', roomId);
-
-  useSubscription<RoomMessage>(
-    connectionName ?? 'room:_placeholder',
-    '*',
-    (msg) => { ... },
-  );
+function Question({ questionId, url }: { questionId: string; url: string }) {
+  const socket = useLocalSocket(questionDefinition, {
+    key: questionId,
+    options: { url },
+  });
+  const { status } = useSocketState(socket);
+  return <span>{status}</span>;
 }
 ```
 
-The provider's `resolve` function must handle the resulting name (`room:42`).
+A local hook owns a connection without a Provider. Ordinary rerenders retain it; changing `key` disposes the old connection and creates a new one. `options` initialize that identity once. To change its URL or another option while keeping identity, call `socket.update(...)` from application code. Local controllers can be passed to child components.
 
-### `useCloseClient`
-
-Closes and removes a client by name. The next time a hook requests the same name, the client is recreated from config. Useful for explicitly tearing down dynamic connections.
-
-```tsx
-const closeClient = useCloseClient();
-closeClient('room:42');
-```
-
-`useDynamicConnection` handles this automatically on ID change and unmount. Use `useCloseClient` directly only when you need manual control.
-
----
-
-## Connection options
-
-All options for `WebSocketClientOptions`:
-
-| Option | Type | Default | Description |
-|---|---|---|---|
-| `url` | `string` | — | WebSocket URL (`ws://` or `wss://`) |
-| `protocols` | `string \| string[]` | — | Sub-protocols for the native WebSocket |
-| `autoConnect` | `boolean` | `true` | Connect immediately on construction |
-| `reconnect` | `boolean` | `true` | Auto-reconnect on unexpected close |
-| `maxReconnectAttempts` | `number` | `Infinity` | Give up after this many attempts |
-| `backoff` | `BackoffStrategy` | exponential, capped at 30s | Delay between reconnect attempts |
-| `queueWhileDisconnected` | `boolean` | `true` | Queue outbound messages while offline |
-| `maxQueueSize` | `number` | `100` | Max queued messages (oldest dropped) |
-| `heartbeat.message` | `TMessage \| string` | `{ type: 'ping' }` | Message to send as a ping |
-| `heartbeat.intervalMs` | `number` | `30000` | Ping interval in ms |
-| `heartbeat.timeoutMs` | `number` | `60000` | Silence threshold before force-reconnect |
-| `serialize` | `(msg) => string \| ArrayBuffer \| Blob` | `JSON.stringify` | Outbound message serializer |
-| `deserialize` | `(data) => TMessage \| null` | `JSON.parse` | Inbound message deserializer |
-
----
-
-## Backoff strategies
-
-Two built-in strategies, or bring your own `BackoffStrategy = (attempt: number) => number`:
+## Standalone connection
 
 ```ts
-import { exponentialBackoff, fixedBackoff } from 'react-socket-link';
+import { createSocket, defineSocket } from 'react-socket-link/core';
 
-// Exponential with full jitter — prevents thundering herd on server restart
-// Formula: random(0, min(cap, base * 2^attempt))
-exponentialBackoff(1000, 30_000) // default
-
-// Fixed delay — useful for tests or LAN apps
-fixedBackoff(2000)
+const question = defineSocket<Incoming, Outgoing>('question');
+const socket = createSocket(question, { url: 'wss://example.com/question/42' });
+const unsubscribe = socket.subscribe('notification', message => console.log(message.payload.text));
+socket.connect();
+await socket.whenOpen({ timeoutMs: 10_000 });
+const result = socket.send({ type: 'mark-read', payload: '123' });
+// result.status is 'sent', 'queued', or 'rejected'. 'sent' is browser acceptance,
+// not a server delivery acknowledgement.
+unsubscribe();
+socket.close();
+socket.dispose();
 ```
 
----
+`connect()` is idempotent while active and can reopen a previously closed connection. `reconnect()` replaces the current transport with the same options; `update(partialOptions)` merges options and replaces the transport if active. `close()` stops retries and clears queued messages. `dispose()` permanently releases the instance. `whenOpen()` resolves on a native handshake and rejects on timeout, closure, or disposal; it does not wait for application-level server registration.
 
-## Framework-agnostic client
-
-`WebSocketClient` has no React dependency and can be used in any environment:
+## Options and behavior
 
 ```ts
-import { WebSocketClient } from 'react-socket-link';
-
-const client = new WebSocketClient<ChatMessage>({
-  url: 'wss://api.example.com/chat',
-  reconnect: true,
+createSocket(question, {
+  url: 'wss://example.com/question/42',
+  protocols: ['v1'],
+  heartbeat: { message: '{"type":"ping"}', intervalMs: 30_000, timeoutMs: 60_000 },
+  reconnect: { enabled: true, maxAttempts: Infinity, backoff: exponentialBackoff() },
+  queue: { enabled: true, maxSize: 100 },
+  codec: {
+    encode: message => JSON.stringify(message),
+    decode: data => {
+      // Validate network input here and return null for messages to discard.
+      return typeof data === 'string' ? JSON.parse(data) as Incoming : null;
+    },
+  },
 });
-
-const unsub = client.subscribe('chat', (msg) => {
-  console.log(msg.payload.text);
-});
-
-client.onStateChange((state) => console.log('state:', state));
-client.onError((event) => console.error('error:', event));
-
-client.send({ type: 'chat', payload: { user: 'alice', text: 'hello' } });
-client.close();
-unsub();
 ```
 
----
+Defaults: automatic reconnect with full-jitter exponential backoff, a 100-message outbound queue, JSON codec, and no heartbeat. The queue rejects new messages when full and is cleared on intentional close or disposal. `fixedBackoff(ms)` is also available. If the backend needs explicit subscriptions after each handshake, replay those at the application level.
 
-## React Strict Mode
+State snapshots contain `status` (`IDLE`, `CONNECTING`, `OPEN`, `RECONNECTING`, `CLOSED`), `isConnected`, `reconnectAttempt`, and `lastError`. `useSocketState()` observes them through `useSyncExternalStore`. Errors omit connection URLs and protocol values. A codec can return `null` to discard a message silently; decoding exceptions and invalid decoded shapes set a deserialization error.
 
-The provider is Strict Mode safe. In development, React mounts effects twice (mount → cleanup → remount) to surface bugs. The provider tracks which connections were active when the cleanup ran and reconnects only those on remount — connections configured with `autoConnect: false` are never prematurely started.
+Transport replacement is close-first. Old transport events cannot update the logical connection, but events sent by the server during the gap may be lost. Applications requiring lossless delivery need backend replay or resynchronization.
+
+## Migration from v0.1
+
+This is a breaking API change. Replace named Provider registries and `resolve(name)` with typed definitions and explicit global registrations. Replace `useWebSocket(name)` with `useGlobalSocket(definition)` or `useGlobalSocketController(definition)`. Replace `useSubscription`, `useConnectionState`, and `useSend` with `useSocketEvent`, `useSocketState`, and `useSocketSend`. Replace dynamic named connections with `useLocalSocket(definition, { key, options })`. `WebSocketClient` is no longer a package export; use `createSocket` for standalone use.

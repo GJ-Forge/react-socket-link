@@ -1,0 +1,213 @@
+{
+  "scriptCompleted": true,
+  "commonPrefix": "",
+  "directoryGroups": {
+    "src": [
+      "file:src/core/ConnectionDefinition.ts",
+      "file:src/core/ConnectionState.ts",
+      "file:src/core/LogicalConnection.ts",
+      "file:src/react/SocketProvider.tsx",
+      "file:src/react/useGlobalSocket.ts",
+      "file:src/react/useGlobalSocketController.ts",
+      "file:src/react/useSocketEvent.ts",
+      "file:src/react/useSocketSend.ts",
+      "file:src/react/useSocketState.ts",
+      "file:src/core/index.ts",
+      "file:src/index.ts",
+      "file:src/core/ConnectionOptions.ts",
+      "file:src/core/ReconnectionPolicy.ts",
+      "file:src/core/WebSocketTransport.ts",
+      "file:src/react/useLocalSocket.ts",
+      "file:src/utils/Backoff.ts"
+    ],
+    "tests": [
+      "file:tests/core.test.ts",
+      "file:tests/helpers/MockWebSocket.ts",
+      "file:tests/react.test.tsx",
+      "file:tests/types.test.ts"
+    ],
+    "root": [
+      "document:LICENSE.md",
+      "document:README.md",
+      "config:package.json",
+      "config:tsconfig.app.json",
+      "config:tsconfig.build.json",
+      "config:tsconfig.json",
+      "config:tsconfig.node.json",
+      "file:.npmrc",
+      "file:eslint.config.js",
+      "file:vite.config.ts"
+    ]
+  },
+  "nodeTypeGroups": {
+    "file": [
+      "file:src/core/ConnectionDefinition.ts",
+      "file:src/core/ConnectionState.ts",
+      "file:src/core/LogicalConnection.ts",
+      "file:src/react/SocketProvider.tsx",
+      "file:src/react/useGlobalSocket.ts",
+      "file:src/react/useGlobalSocketController.ts",
+      "file:src/react/useSocketEvent.ts",
+      "file:src/react/useSocketSend.ts",
+      "file:src/react/useSocketState.ts",
+      "file:src/core/index.ts",
+      "file:src/index.ts",
+      "file:tests/core.test.ts",
+      "file:tests/helpers/MockWebSocket.ts",
+      "file:tests/react.test.tsx",
+      "file:tests/types.test.ts",
+      "file:src/core/ConnectionOptions.ts",
+      "file:src/core/ReconnectionPolicy.ts",
+      "file:src/core/WebSocketTransport.ts",
+      "file:src/react/useLocalSocket.ts",
+      "file:src/utils/Backoff.ts",
+      "file:.npmrc",
+      "file:eslint.config.js",
+      "file:vite.config.ts"
+    ],
+    "document": [
+      "document:LICENSE.md",
+      "document:README.md"
+    ],
+    "config": [
+      "config:package.json",
+      "config:tsconfig.app.json",
+      "config:tsconfig.build.json",
+      "config:tsconfig.json",
+      "config:tsconfig.node.json"
+    ]
+  },
+  "crossCategoryEdges": [
+    {
+      "fromType": "document",
+      "toType": "file",
+      "edgeType": "documents",
+      "count": 7
+    },
+    {
+      "fromType": "document",
+      "toType": "config",
+      "edgeType": "related",
+      "count": 1
+    },
+    {
+      "fromType": "config",
+      "toType": "file",
+      "edgeType": "configures",
+      "count": 9
+    },
+    {
+      "fromType": "config",
+      "toType": "file",
+      "edgeType": "depends_on",
+      "count": 1
+    },
+    {
+      "fromType": "file",
+      "toType": "config",
+      "edgeType": "depends_on",
+      "count": 1
+    }
+  ],
+  "interGroupImports": [
+    {
+      "from": "tests",
+      "to": "src",
+      "count": 4
+    }
+  ],
+  "intraGroupDensity": {
+    "src": {
+      "internalEdges": 48,
+      "totalEdges": 52,
+      "density": 0.92
+    },
+    "tests": {
+      "internalEdges": 2,
+      "totalEdges": 6,
+      "density": 0.33
+    }
+  },
+  "patternMatches": {
+    "tests": "test"
+  },
+  "deploymentTopology": {
+    "hasDockerfile": false,
+    "hasCompose": false,
+    "hasK8s": false,
+    "hasTerraform": false,
+    "hasCI": false,
+    "infraFiles": []
+  },
+  "dataPipeline": {
+    "schemaFiles": [],
+    "migrationFiles": [],
+    "dataModelFiles": [],
+    "apiHandlerFiles": []
+  },
+  "docCoverage": {
+    "groupsWithDocs": 1,
+    "totalGroups": 3,
+    "coverageRatio": 0.33,
+    "undocumentedGroups": [
+      "src",
+      "tests"
+    ]
+  },
+  "dependencyDirection": [
+    {
+      "dependent": "tests",
+      "dependsOn": "src"
+    }
+  ],
+  "fileStats": {
+    "totalFileNodes": 30,
+    "filesPerGroup": {
+      "src": 16,
+      "tests": 4,
+      "root": 10
+    },
+    "nodeTypeCounts": {
+      "file": 23,
+      "document": 2,
+      "config": 5
+    }
+  },
+  "fileFanIn": {
+    "file:src/core/ConnectionDefinition.ts": 12,
+    "file:src/core/ConnectionOptions.ts": 6,
+    "file:src/core/ConnectionState.ts": 4,
+    "file:src/core/WebSocketTransport.ts": 1,
+    "file:src/utils/Backoff.ts": 3,
+    "file:src/core/LogicalConnection.ts": 9,
+    "file:src/react/SocketProvider.tsx": 3,
+    "file:src/index.ts": 3,
+    "file:tests/helpers/MockWebSocket.ts": 2,
+    "file:src/core/index.ts": 1,
+    "file:src/core/ReconnectionPolicy.ts": 4,
+    "file:src/react/useGlobalSocket.ts": 1,
+    "file:src/react/useGlobalSocketController.ts": 1,
+    "file:src/react/useLocalSocket.ts": 1,
+    "file:src/react/useSocketState.ts": 1,
+    "file:src/react/useSocketEvent.ts": 1,
+    "file:src/react/useSocketSend.ts": 1
+  },
+  "fileFanOut": {
+    "file:src/core/LogicalConnection.ts": 5,
+    "file:src/react/SocketProvider.tsx": 3,
+    "file:src/react/useGlobalSocket.ts": 3,
+    "file:src/react/useGlobalSocketController.ts": 3,
+    "file:src/react/useSocketEvent.ts": 2,
+    "file:src/react/useSocketSend.ts": 2,
+    "file:src/react/useSocketState.ts": 3,
+    "file:tests/core.test.ts": 2,
+    "file:tests/react.test.tsx": 2,
+    "file:tests/types.test.ts": 2,
+    "file:src/core/index.ts": 6,
+    "file:src/index.ts": 13,
+    "file:src/core/ConnectionOptions.ts": 2,
+    "file:src/core/WebSocketTransport.ts": 2,
+    "file:src/react/useLocalSocket.ts": 3,
+    "file:src/utils/Backoff.ts": 1
+  }
+}

@@ -10,6 +10,6 @@
     },
     // Only the library source ends up in dist/.
     // Tests and examples are dev-only — they should never ship to npm.
-    "include": ["src"],
+    "include": ["src/index.ts", "src/core/**/*.ts", "src/react/**/*.ts", "src/react/**/*.tsx", "src/utils/Backoff.ts"],
     "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "**/__tests__/**"]
   }

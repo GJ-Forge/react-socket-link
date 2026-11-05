@@ -1,0 +1,336 @@
+{
+ "nodes": [
+  {
+   "id": "file:src/core/ConnectionOptions.ts",
+   "type": "file",
+   "name": "ConnectionOptions.ts",
+   "filePath": "src/core/ConnectionOptions.ts",
+   "summary": "Defines the typed socket configuration surface (SocketOptions, heartbeat/reconnect/queue options, MessageCodec, patch type) plus the default JSON codec and runtime validation/merging of options.",
+   "tags": [
+    "type-definition",
+    "validation",
+    "configuration",
+    "serialization"
+   ],
+   "complexity": "moderate",
+   "languageNotes": "Generic interfaces parameterized by Incoming/Outgoing message types; SocketOptionsPatch uses Partial/Omit with nullable heartbeat to allow explicit removal."
+  },
+  {
+   "id": "file:src/core/ReconnectionPolicy.ts",
+   "type": "file",
+   "name": "ReconnectionPolicy.ts",
+   "filePath": "src/core/ReconnectionPolicy.ts",
+   "summary": "Declares the BackoffStrategy type: a function mapping a one-based retry attempt to a delay in milliseconds.",
+   "tags": [
+    "type-definition",
+    "reconnection",
+    "backoff"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:src/core/WebSocketTransport.ts",
+   "type": "file",
+   "name": "WebSocketTransport.ts",
+   "filePath": "src/core/WebSocketTransport.ts",
+   "summary": "Wraps a single native WebSocket with an immutable handshake configuration, forwarding open/message/error/close events and managing heartbeat pings and silence timeouts; disposable so retired sockets never call back.",
+   "tags": [
+    "transport",
+    "websocket",
+    "heartbeat",
+    "service"
+   ],
+   "complexity": "moderate",
+   "languageNotes": "Arrow-function class properties keep stable listener references so addEventListener/removeEventListener pair correctly."
+  },
+  {
+   "id": "file:src/react/useLocalSocket.ts",
+   "type": "file",
+   "name": "useLocalSocket.ts",
+   "filePath": "src/react/useLocalSocket.ts",
+   "summary": "React hook that creates a component-scoped logical socket via createSocket, connecting on mount and closing/disposing on unmount with StrictMode-safe deferred disposal.",
+   "tags": [
+    "hook",
+    "react",
+    "lifecycle",
+    "websocket"
+   ],
+   "complexity": "simple",
+   "languageNotes": "Uses a WeakMap lifecycle version counter plus queueMicrotask so StrictMode double-mount does not dispose a socket that was immediately remounted."
+  },
+  {
+   "id": "file:src/utils/Backoff.ts",
+   "type": "file",
+   "name": "Backoff.ts",
+   "filePath": "src/utils/Backoff.ts",
+   "summary": "Provides reconnection BackoffStrategy factories: exponential backoff with full jitter and a fixed-delay strategy.",
+   "tags": [
+    "utility",
+    "backoff",
+    "reconnection",
+    "factory"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:src/core/ConnectionOptions.ts:validateOptions",
+   "type": "function",
+   "name": "validateOptions",
+   "filePath": "src/core/ConnectionOptions.ts",
+   "lineRange": [
+    61,
+    86
+   ],
+   "summary": "Validates SocketOptions at runtime: ws/wss URL, protocols shape, positive heartbeat/queue numbers, reconnect maxAttempts, backoff and codec function types, throwing descriptive errors.",
+   "tags": [
+    "validation",
+    "configuration",
+    "error-handling"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:src/core/ConnectionOptions.ts:mergeOptions",
+   "type": "function",
+   "name": "mergeOptions",
+   "filePath": "src/core/ConnectionOptions.ts",
+   "lineRange": [
+    88,
+    100
+   ],
+   "summary": "Merges a SocketOptionsPatch into current options, deep-merging heartbeat/reconnect/queue (null removes heartbeat), then validates the result.",
+   "tags": [
+    "configuration",
+    "merge",
+    "validation"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:src/core/WebSocketTransport.ts:WebSocketTransport",
+   "type": "class",
+   "name": "WebSocketTransport",
+   "filePath": "src/core/WebSocketTransport.ts",
+   "lineRange": [
+    12,
+    90
+   ],
+   "summary": "Owns one native WebSocket: connect, send, dispose, event forwarding to TransportEvents, and heartbeat interval/silence-timeout handling that closes with code 4000 on failure.",
+   "tags": [
+    "transport",
+    "websocket",
+    "heartbeat",
+    "lifecycle"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:src/react/useLocalSocket.ts:useLocalSocket",
+   "type": "function",
+   "name": "useLocalSocket",
+   "filePath": "src/react/useLocalSocket.ts",
+   "lineRange": [
+    12,
+    35
+   ],
+   "summary": "Memoizes a SocketController keyed by definition and optional key, connects in an effect, and on cleanup closes then disposes only if no newer lifecycle took over.",
+   "tags": [
+    "hook",
+    "react",
+    "lifecycle"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:src/utils/Backoff.ts:exponentialBackoff",
+   "type": "function",
+   "name": "exponentialBackoff",
+   "filePath": "src/utils/Backoff.ts",
+   "lineRange": [
+    13,
+    21
+   ],
+   "summary": "Returns a BackoffStrategy computing random(0, min(cap, base*2^(attempt-1))) to avoid thundering-herd reconnects.",
+   "tags": [
+    "utility",
+    "backoff",
+    "jitter",
+    "factory"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:src/utils/Backoff.ts:fixedBackoff",
+   "type": "function",
+   "name": "fixedBackoff",
+   "filePath": "src/utils/Backoff.ts",
+   "lineRange": [
+    24,
+    26
+   ],
+   "summary": "Returns a BackoffStrategy that always yields the same delay; useful for tests or LAN apps.",
+   "tags": [
+    "utility",
+    "backoff",
+    "factory"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:src/core/ConnectionOptions.ts",
+   "target": "function:src/core/ConnectionOptions.ts:validateOptions",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/core/ConnectionOptions.ts",
+   "target": "function:src/core/ConnectionOptions.ts:validateOptions",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/core/ConnectionOptions.ts",
+   "target": "function:src/core/ConnectionOptions.ts:mergeOptions",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/core/ConnectionOptions.ts",
+   "target": "function:src/core/ConnectionOptions.ts:mergeOptions",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/core/WebSocketTransport.ts",
+   "target": "class:src/core/WebSocketTransport.ts:WebSocketTransport",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/core/WebSocketTransport.ts",
+   "target": "class:src/core/WebSocketTransport.ts:WebSocketTransport",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/react/useLocalSocket.ts",
+   "target": "function:src/react/useLocalSocket.ts:useLocalSocket",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/react/useLocalSocket.ts",
+   "target": "function:src/react/useLocalSocket.ts:useLocalSocket",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/utils/Backoff.ts",
+   "target": "function:src/utils/Backoff.ts:exponentialBackoff",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/utils/Backoff.ts",
+   "target": "function:src/utils/Backoff.ts:exponentialBackoff",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/utils/Backoff.ts",
+   "target": "function:src/utils/Backoff.ts:fixedBackoff",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/utils/Backoff.ts",
+   "target": "function:src/utils/Backoff.ts:fixedBackoff",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/core/ConnectionOptions.ts",
+   "target": "file:src/core/ConnectionDefinition.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/core/ConnectionOptions.ts",
+   "target": "file:src/core/ReconnectionPolicy.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/core/WebSocketTransport.ts",
+   "target": "file:src/core/ConnectionDefinition.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/core/WebSocketTransport.ts",
+   "target": "file:src/core/ConnectionOptions.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/useLocalSocket.ts",
+   "target": "file:src/core/ConnectionDefinition.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/useLocalSocket.ts",
+   "target": "file:src/core/ConnectionOptions.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/react/useLocalSocket.ts",
+   "target": "file:src/core/LogicalConnection.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/utils/Backoff.ts",
+   "target": "file:src/core/ReconnectionPolicy.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:src/core/ConnectionOptions.ts:mergeOptions",
+   "target": "function:src/core/ConnectionOptions.ts:validateOptions",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:src/react/useLocalSocket.ts:useLocalSocket",
+   "target": "function:src/core/LogicalConnection.ts:createSocket",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

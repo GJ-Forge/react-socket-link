@@ -1,7 +1,7 @@
 {
   "name": "react-socket-link",
-  "version": "0.1.0",
-  "description": "Typed WebSocket library for React with auto-reconnect, pub/sub, and multi-connection support",
+  "version": "1.0.0",
+  "description": "Typed WebSocket connections for React and standalone TypeScript",
   "author": "GJForge",
   "license": "MIT",
   "type": "module",
@@ -13,12 +13,17 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "import": "./dist/core.js",
+      "require": "./dist/core.cjs"
     }
   },
   "files": [
     "dist",
     "README.md",
-    "LICENSE"
+    "LICENSE.md"
   ],
   "sideEffects": false,
   "scripts": {
@@ -27,10 +32,17 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
+    "docs:generate": "typedoc",
+    "docs:check": "typedoc --emit none --treatWarningsAsErrors",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
-    "react": ">=17.0.0"
+    "react": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
@@ -40,6 +52,7 @@
     "jsdom": "^25.0.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
+    "typedoc": "^0.28.20",
     "typescript": "^5.4.0",
     "vite": "^5.4.0",
     "vite-plugin-dts": "^4.0.0",
