@@ -7,14 +7,14 @@ export default defineConfig({
     react(),
     dts({
       tsconfigPath: './tsconfig.build.json',
-      include: ['src'],
+      include: ['src/index.ts', 'src/core/**/*.ts', 'src/react/**/*.ts', 'src/react/**/*.tsx', 'src/utils/Backoff.ts'],
     }),
   ],
   build: {
     lib: {
-      entry: 'src/index.ts',
+      entry: { index: 'src/index.ts', core: 'src/core/index.ts' },
       formats: ['es', 'cjs'],
-      fileName: (format) => (format === 'es' ? 'index.js' : 'index.cjs'),
+      fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'js' : 'cjs'}`,
     },
     rollupOptions: {
       external: ['react', 'react/jsx-runtime'],

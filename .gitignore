@@ -5,3 +5,12 @@ dist
 .vscode
 coverage
 .npmrc
+
+# Tooling
+.claude
+.codeboarding
+.agents
+docs/api/
+.npmrc
+.ua
+

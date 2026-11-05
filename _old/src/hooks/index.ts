@@ -115,9 +115,19 @@ export function useCloseClient(): (name: string) => void {
  * The Provider's `resolve` function must handle the resulting name
  * (typically of the form `${prefix}:${id}`).
  *
+ * Hooks can't be called conditionally, so render the connection-bound hooks
+ * in a child component that only mounts once a name exists.
+ *
  * @example
- *   const connectionName = useDynamicConnection('room', activeRoomId);
- *   const send = connectionName ? useSend(connectionName) : null;
+ *   function Room({ roomId }: { roomId: string | null }) {
+ *     const connectionName = useDynamicConnection('room', roomId);
+ *     return connectionName ? <RoomBody name={connectionName} /> : null;
+ *   }
+ *
+ *   function RoomBody({ name }: { name: string }) {
+ *     const send = useSend(name);
+ *     // ...
+ *   }
  */
 export function useDynamicConnection(
   namePrefix: string,
