@@ -1,0 +1,600 @@
+{
+ "scriptCompleted": true,
+ "entryPointCandidates": [
+  {
+   "id": "file:src/index.ts",
+   "score": 5,
+   "name": "index.ts",
+   "summary": "Main package entry point that re-exports the full public API: core connection primitives and types plus the React SocketProvider, registerSocket, and socket hooks.",
+   "type": "file"
+  },
+  {
+   "id": "document:README.md",
+   "score": 5,
+   "name": "README.md",
+   "summary": "Project documentation for react-socket-link v1.0 covering install, typed protocol definitions with defineSocket, global Provider-based and local hook-based React connections, the standalone /core createSocket API, options (heartbeat, reconnect backoff, queue, codec), state snapshots, and a migration guide from v0.1.",
+   "type": "document"
+  },
+  {
+   "id": "file:src/core/index.ts",
+   "score": 4,
+   "name": "index.ts",
+   "summary": "React-free '/core' entry point barrel that re-exports socket definitions, the LogicalConnection/createSocket API, option and state types, and backoff helpers for standalone TypeScript use.",
+   "type": "file"
+  },
+  {
+   "id": "document:LICENSE.md",
+   "score": 2,
+   "name": "LICENSE.md",
+   "summary": "MIT license text granting permissive reuse rights for the react-socket-link package; shipped in the npm tarball via package.json \"files\".",
+   "type": "document"
+  },
+  {
+   "id": "file:.npmrc",
+   "score": 2,
+   "name": ".npmrc",
+   "summary": "npm client configuration holding an authentication entry for the public npm registry, used when publishing the react-socket-link package. Contains a credential and should not be committed or shared.",
+   "type": "file"
+  }
+ ],
+ "fanInRanking": [
+  {
+   "id": "file:src/core/ConnectionDefinition.ts",
+   "fanIn": 12,
+   "name": "ConnectionDefinition.ts"
+  },
+  {
+   "id": "file:src/index.ts",
+   "fanIn": 10,
+   "name": "index.ts"
+  },
+  {
+   "id": "file:src/core/LogicalConnection.ts",
+   "fanIn": 9,
+   "name": "LogicalConnection.ts"
+  },
+  {
+   "id": "file:tests/react.test.tsx",
+   "fanIn": 9,
+   "name": "react.test.tsx"
+  },
+  {
+   "id": "file:src/core/ConnectionOptions.ts",
+   "fanIn": 6,
+   "name": "ConnectionOptions.ts"
+  },
+  {
+   "id": "file:src/utils/Backoff.ts",
+   "fanIn": 6,
+   "name": "Backoff.ts"
+  },
+  {
+   "id": "file:src/core/index.ts",
+   "fanIn": 5,
+   "name": "index.ts"
+  },
+  {
+   "id": "file:tests/core.test.ts",
+   "fanIn": 5,
+   "name": "core.test.ts"
+  },
+  {
+   "id": "file:tests/types.test.ts",
+   "fanIn": 5,
+   "name": "types.test.ts"
+  },
+  {
+   "id": "file:src/core/ConnectionState.ts",
+   "fanIn": 4,
+   "name": "ConnectionState.ts"
+  },
+  {
+   "id": "file:src/react/SocketProvider.tsx",
+   "fanIn": 4,
+   "name": "SocketProvider.tsx"
+  },
+  {
+   "id": "file:src/core/ReconnectionPolicy.ts",
+   "fanIn": 4,
+   "name": "ReconnectionPolicy.ts"
+  },
+  {
+   "id": "file:vite.config.ts",
+   "fanIn": 3,
+   "name": "vite.config.ts"
+  },
+  {
+   "id": "file:src/react/useGlobalSocket.ts",
+   "fanIn": 2,
+   "name": "useGlobalSocket.ts"
+  },
+  {
+   "id": "file:src/react/useSocketState.ts",
+   "fanIn": 2,
+   "name": "useSocketState.ts"
+  },
+  {
+   "id": "file:tests/helpers/MockWebSocket.ts",
+   "fanIn": 2,
+   "name": "MockWebSocket.ts"
+  },
+  {
+   "id": "file:src/react/useLocalSocket.ts",
+   "fanIn": 2,
+   "name": "useLocalSocket.ts"
+  },
+  {
+   "id": "config:tsconfig.build.json",
+   "fanIn": 2,
+   "name": "tsconfig.build.json"
+  },
+  {
+   "id": "file:src/react/useGlobalSocketController.ts",
+   "fanIn": 1,
+   "name": "useGlobalSocketController.ts"
+  },
+  {
+   "id": "file:src/react/useSocketEvent.ts",
+   "fanIn": 1,
+   "name": "useSocketEvent.ts"
+  }
+ ],
+ "fanOutRanking": [
+  {
+   "id": "file:src/index.ts",
+   "fanOut": 16,
+   "name": "index.ts"
+  },
+  {
+   "id": "file:src/core/LogicalConnection.ts",
+   "fanOut": 7,
+   "name": "LogicalConnection.ts"
+  },
+  {
+   "id": "file:src/core/index.ts",
+   "fanOut": 7,
+   "name": "index.ts"
+  },
+  {
+   "id": "document:README.md",
+   "fanOut": 7,
+   "name": "README.md"
+  },
+  {
+   "id": "file:src/react/SocketProvider.tsx",
+   "fanOut": 5,
+   "name": "SocketProvider.tsx"
+  },
+  {
+   "id": "file:src/react/useGlobalSocket.ts",
+   "fanOut": 4,
+   "name": "useGlobalSocket.ts"
+  },
+  {
+   "id": "file:src/react/useGlobalSocketController.ts",
+   "fanOut": 4,
+   "name": "useGlobalSocketController.ts"
+  },
+  {
+   "id": "file:src/react/useSocketState.ts",
+   "fanOut": 4,
+   "name": "useSocketState.ts"
+  },
+  {
+   "id": "file:src/core/WebSocketTransport.ts",
+   "fanOut": 4,
+   "name": "WebSocketTransport.ts"
+  },
+  {
+   "id": "file:src/react/useLocalSocket.ts",
+   "fanOut": 4,
+   "name": "useLocalSocket.ts"
+  },
+  {
+   "id": "config:package.json",
+   "fanOut": 4,
+   "name": "package.json"
+  },
+  {
+   "id": "config:tsconfig.build.json",
+   "fanOut": 4,
+   "name": "tsconfig.build.json"
+  },
+  {
+   "id": "file:vite.config.ts",
+   "fanOut": 4,
+   "name": "vite.config.ts"
+  },
+  {
+   "id": "file:src/core/ConnectionDefinition.ts",
+   "fanOut": 3,
+   "name": "ConnectionDefinition.ts"
+  },
+  {
+   "id": "file:src/react/useSocketEvent.ts",
+   "fanOut": 3,
+   "name": "useSocketEvent.ts"
+  },
+  {
+   "id": "file:src/react/useSocketSend.ts",
+   "fanOut": 2,
+   "name": "useSocketSend.ts"
+  },
+  {
+   "id": "file:tests/core.test.ts",
+   "fanOut": 2,
+   "name": "core.test.ts"
+  },
+  {
+   "id": "file:tests/react.test.tsx",
+   "fanOut": 2,
+   "name": "react.test.tsx"
+  },
+  {
+   "id": "file:tests/types.test.ts",
+   "fanOut": 2,
+   "name": "types.test.ts"
+  },
+  {
+   "id": "file:src/core/ConnectionOptions.ts",
+   "fanOut": 2,
+   "name": "ConnectionOptions.ts"
+  }
+ ],
+ "bfsTraversal": {
+  "startNode": "file:src/index.ts",
+  "order": [
+   "file:src/index.ts",
+   "file:src/core/ConnectionDefinition.ts",
+   "file:src/core/LogicalConnection.ts",
+   "file:src/core/ConnectionOptions.ts",
+   "file:src/core/ConnectionState.ts",
+   "file:src/core/ReconnectionPolicy.ts",
+   "file:src/utils/Backoff.ts",
+   "file:src/react/SocketProvider.tsx",
+   "file:src/react/useGlobalSocket.ts",
+   "file:src/react/useGlobalSocketController.ts",
+   "file:src/react/useLocalSocket.ts",
+   "file:src/react/useSocketState.ts",
+   "file:src/react/useSocketEvent.ts",
+   "file:src/react/useSocketSend.ts",
+   "file:src/core/WebSocketTransport.ts"
+  ],
+  "depthMap": {
+   "file:src/index.ts": 0,
+   "file:src/core/ConnectionDefinition.ts": 1,
+   "file:src/core/LogicalConnection.ts": 1,
+   "file:src/core/ConnectionOptions.ts": 1,
+   "file:src/core/ConnectionState.ts": 1,
+   "file:src/core/ReconnectionPolicy.ts": 1,
+   "file:src/utils/Backoff.ts": 1,
+   "file:src/react/SocketProvider.tsx": 1,
+   "file:src/react/useGlobalSocket.ts": 1,
+   "file:src/react/useGlobalSocketController.ts": 1,
+   "file:src/react/useLocalSocket.ts": 1,
+   "file:src/react/useSocketState.ts": 1,
+   "file:src/react/useSocketEvent.ts": 1,
+   "file:src/react/useSocketSend.ts": 1,
+   "file:src/core/WebSocketTransport.ts": 2
+  },
+  "byDepth": {
+   "0": [
+    "file:src/index.ts"
+   ],
+   "1": [
+    "file:src/core/ConnectionDefinition.ts",
+    "file:src/core/LogicalConnection.ts",
+    "file:src/core/ConnectionOptions.ts",
+    "file:src/core/ConnectionState.ts",
+    "file:src/core/ReconnectionPolicy.ts",
+    "file:src/utils/Backoff.ts",
+    "file:src/react/SocketProvider.tsx",
+    "file:src/react/useGlobalSocket.ts",
+    "file:src/react/useGlobalSocketController.ts",
+    "file:src/react/useLocalSocket.ts",
+    "file:src/react/useSocketState.ts",
+    "file:src/react/useSocketEvent.ts",
+    "file:src/react/useSocketSend.ts"
+   ],
+   "2": [
+    "file:src/core/WebSocketTransport.ts"
+   ]
+  }
+ },
+ "nonCodeFiles": {
+  "documentation": [
+   {
+    "id": "document:LICENSE.md",
+    "name": "LICENSE.md",
+    "type": "document",
+    "summary": "MIT license text granting permissive reuse rights for the react-socket-link package; shipped in the npm tarball via package.json \"files\"."
+   },
+   {
+    "id": "document:README.md",
+    "name": "README.md",
+    "type": "document",
+    "summary": "Project documentation for react-socket-link v1.0 covering install, typed protocol definitions with defineSocket, global Provider-based and local hook-based React connections, the standalone /core createSocket API, options (heartbeat, reconnect backoff, queue, codec), state snapshots, and a migration guide from v0.1."
+   }
+  ],
+  "infrastructure": [],
+  "data": [],
+  "config": [
+   {
+    "id": "config:package.json",
+    "name": "package.json",
+    "type": "config",
+    "summary": "npm manifest for react-socket-link 1.0.0: dual ESM/CJS exports for the root (React) entry and a React-free \"./core\" subpath, optional React >=18 peer dependency, and Vite/Vitest/tsc build, test and typecheck scripts."
+   },
+   {
+    "id": "config:tsconfig.app.json",
+    "name": "tsconfig.app.json",
+    "type": "config",
+    "summary": "Vite-template TypeScript config for application sources in src: ES2023 + DOM, bundler module resolution, react-jsx, verbatimModuleSyntax and erasableSyntaxOnly with no emit."
+   },
+   {
+    "id": "config:tsconfig.build.json",
+    "name": "tsconfig.build.json",
+    "type": "config",
+    "summary": "Build-only TypeScript config extending tsconfig.json that emits declaration files to dist/ for the published library sources (src/index.ts, src/core, src/react, Backoff) while excluding tests."
+   },
+   {
+    "id": "config:tsconfig.json",
+    "name": "tsconfig.json",
+    "type": "config",
+    "summary": "Root TypeScript configuration used for editor IntelliSense and typechecking: strict ES2020/DOM settings with bundler resolution and react-jsx, covering src, tests, examples and Vite/Vitest configs."
+   },
+   {
+    "id": "config:tsconfig.node.json",
+    "name": "tsconfig.node.json",
+    "type": "config",
+    "summary": "TypeScript configuration for Node-side tooling, scoped to vite.config.ts with ES2023 target, Node types and bundler resolution."
+   }
+  ]
+ },
+ "clusters": [
+  {
+   "nodes": [
+    "file:src/utils/Backoff.ts",
+    "file:src/core/LogicalConnection.ts",
+    "file:src/core/index.ts",
+    "file:src/index.ts",
+    "file:src/core/ConnectionDefinition.ts"
+   ],
+   "edgeCount": 19
+  },
+  {
+   "nodes": [
+    "file:src/core/LogicalConnection.ts",
+    "file:src/react/SocketProvider.tsx",
+    "file:src/react/useGlobalSocket.ts",
+    "file:src/react/useGlobalSocketController.ts",
+    "file:src/index.ts"
+   ],
+   "edgeCount": 18
+  },
+  {
+   "nodes": [
+    "file:src/core/ConnectionOptions.ts",
+    "file:src/core/LogicalConnection.ts",
+    "file:src/react/SocketProvider.tsx",
+    "file:src/core/index.ts",
+    "file:src/index.ts"
+   ],
+   "edgeCount": 17
+  },
+  {
+   "nodes": [
+    "file:src/index.ts",
+    "file:tests/core.test.ts",
+    "file:src/core/ConnectionDefinition.ts",
+    "file:src/core/LogicalConnection.ts",
+    "file:src/react/SocketProvider.tsx"
+   ],
+   "edgeCount": 16
+  },
+  {
+   "nodes": [
+    "file:src/core/ConnectionDefinition.ts",
+    "file:src/core/LogicalConnection.ts",
+    "file:src/react/SocketProvider.tsx",
+    "file:src/react/useGlobalSocket.ts",
+    "file:src/react/useGlobalSocketController.ts"
+   ],
+   "edgeCount": 12
+  }
+ ],
+ "layers": {
+  "count": 7,
+  "list": [
+   {
+    "id": "layer:public-api",
+    "name": "Public API Entry Points",
+    "description": "Barrel modules exposing the package's two entry points: the main React-plus-core export and the React-free `/core` subpath."
+   },
+   {
+    "id": "layer:react-bindings",
+    "name": "React Bindings",
+    "description": "SocketProvider context and hooks (global, local, event, send, state) that bind logical connections to React 18+ component lifecycles via external stores."
+   },
+   {
+    "id": "layer:core-runtime",
+    "name": "Core Connection Runtime",
+    "description": "Framework-agnostic logical connection state machine, replaceable native WebSocket transport with heartbeat, and backoff utilities that drive reconnection."
+   },
+   {
+    "id": "layer:core-contracts",
+    "name": "Core Contracts",
+    "description": "Typed connection definitions, options with validation and serialization, connection state models, and reconnection policy types shared by every other layer."
+   },
+   {
+    "id": "layer:test",
+    "name": "Test Suite",
+    "description": "Vitest suites covering core reconnection behavior, React hooks, and compile-time protocol typing, backed by a MockWebSocket helper."
+   },
+   {
+    "id": "layer:config",
+    "name": "Build & Tooling Configuration",
+    "description": "Package manifest, TypeScript project configs, Vite library/test build, ESLint rules, and npm publishing settings."
+   },
+   {
+    "id": "layer:documentation",
+    "name": "Documentation",
+    "description": "README with overview, API reference and migration guide, plus the project license."
+   }
+  ]
+ },
+ "nodeSummaryIndex": {
+  "file:src/core/ConnectionDefinition.ts": {
+   "name": "ConnectionDefinition.ts",
+   "type": "file",
+   "summary": "Declares the BaseMessage contract and the SocketDefinition identity/type token, plus defineSocket to create frozen, symbol-identified definitions that never open a socket."
+  },
+  "file:src/core/ConnectionState.ts": {
+   "name": "ConnectionState.ts",
+   "type": "file",
+   "summary": "Defines connection status and error-code union types, the SocketError and ConnectionSnapshot shapes, and a snapshot factory for immutable state objects."
+  },
+  "file:src/core/LogicalConnection.ts": {
+   "name": "LogicalConnection.ts",
+   "type": "file",
+   "summary": "Core logical connection implementation: a stable identity that owns retry policy, outgoing queue, message/state subscriptions and open-waiters while swapping replaceable WebSocketTransport instances underneath. Also defines the SocketView/SocketController interfaces and the createSocket factory."
+  },
+  "file:src/react/SocketProvider.tsx": {
+   "name": "SocketProvider.tsx",
+   "type": "file",
+   "summary": "React context provider that eagerly creates a registry of LogicalConnections from socket registrations, connects them on mount, and disposes them on unmount in a Strict-Mode-safe way; also exposes registerSocket and useProviderSocket."
+  },
+  "file:src/react/useGlobalSocket.ts": {
+   "name": "useGlobalSocket.ts",
+   "type": "file",
+   "summary": "Hook returning the read/send SocketView of a provider-registered global socket for a given definition."
+  },
+  "file:src/react/useGlobalSocketController.ts": {
+   "name": "useGlobalSocketController.ts",
+   "type": "file",
+   "summary": "Hook returning the full SocketController (connect/reconnect/update/close) for a provider-registered global socket."
+  },
+  "file:src/react/useSocketEvent.ts": {
+   "name": "useSocketEvent.ts",
+   "type": "file",
+   "summary": "Hook subscribing a handler to a typed message type (or wildcard) on a socket, keeping the latest handler in a ref to avoid resubscription."
+  },
+  "file:src/react/useSocketSend.ts": {
+   "name": "useSocketSend.ts",
+   "type": "file",
+   "summary": "Hook producing a memoized send function bound to a socket."
+  },
+  "file:src/react/useSocketState.ts": {
+   "name": "useSocketState.ts",
+   "type": "file",
+   "summary": "Hook exposing a socket's ConnectionSnapshot to React via useSyncExternalStore."
+  },
+  "file:src/core/index.ts": {
+   "name": "index.ts",
+   "type": "file",
+   "summary": "React-free '/core' entry point barrel that re-exports socket definitions, the LogicalConnection/createSocket API, option and state types, and backoff helpers for standalone TypeScript use."
+  },
+  "file:src/index.ts": {
+   "name": "index.ts",
+   "type": "file",
+   "summary": "Main package entry point that re-exports the full public API: core connection primitives and types plus the React SocketProvider, registerSocket, and socket hooks."
+  },
+  "file:tests/core.test.ts": {
+   "name": "core.test.ts",
+   "type": "file",
+   "summary": "Vitest suite for LogicalConnection behavior: identity preservation across transport replacement, update coalescing, reconnection/backoff, queue bounding and flushing, readiness waits, update validation with credential redaction, heartbeats, and codec rejection."
+  },
+  "file:tests/helpers/MockWebSocket.ts": {
+   "name": "MockWebSocket.ts",
+   "type": "file",
+   "summary": "Test double for the browser WebSocket built on EventTarget, tracking created instances, sent payloads and close calls, with helpers to simulate open, message and abnormal close events."
+  },
+  "file:tests/react.test.tsx": {
+   "name": "react.test.tsx",
+   "type": "file",
+   "summary": "React integration tests verifying global sockets start without consumers and share one controller, local socket identity across re-renders and key changes, Strict Mode effect replay safety, and independent connections per hook owner."
+  },
+  "file:tests/types.test.ts": {
+   "name": "types.test.ts",
+   "type": "file",
+   "summary": "Compile-time type tests using expectTypeOf and @ts-expect-error to ensure socket definitions bind incoming/outgoing message types, narrow subscribed events, and reject mismatched codecs or sends."
+  },
+  "file:src/core/ConnectionOptions.ts": {
+   "name": "ConnectionOptions.ts",
+   "type": "file",
+   "summary": "Defines the typed socket configuration surface (SocketOptions, heartbeat/reconnect/queue options, MessageCodec, patch type) plus the default JSON codec and runtime validation/merging of options."
+  },
+  "file:src/core/ReconnectionPolicy.ts": {
+   "name": "ReconnectionPolicy.ts",
+   "type": "file",
+   "summary": "Declares the BackoffStrategy type: a function mapping a one-based retry attempt to a delay in milliseconds."
+  },
+  "file:src/core/WebSocketTransport.ts": {
+   "name": "WebSocketTransport.ts",
+   "type": "file",
+   "summary": "Wraps a single native WebSocket with an immutable handshake configuration, forwarding open/message/error/close events and managing heartbeat pings and silence timeouts; disposable so retired sockets never call back."
+  },
+  "file:src/react/useLocalSocket.ts": {
+   "name": "useLocalSocket.ts",
+   "type": "file",
+   "summary": "React hook that creates a component-scoped logical socket via createSocket, connecting on mount and closing/disposing on unmount with StrictMode-safe deferred disposal."
+  },
+  "file:src/utils/Backoff.ts": {
+   "name": "Backoff.ts",
+   "type": "file",
+   "summary": "Provides reconnection BackoffStrategy factories: exponential backoff with full jitter and a fixed-delay strategy."
+  },
+  "document:LICENSE.md": {
+   "name": "LICENSE.md",
+   "type": "document",
+   "summary": "MIT license text granting permissive reuse rights for the react-socket-link package; shipped in the npm tarball via package.json \"files\"."
+  },
+  "document:README.md": {
+   "name": "README.md",
+   "type": "document",
+   "summary": "Project documentation for react-socket-link v1.0 covering install, typed protocol definitions with defineSocket, global Provider-based and local hook-based React connections, the standalone /core createSocket API, options (heartbeat, reconnect backoff, queue, codec), state snapshots, and a migration guide from v0.1."
+  },
+  "config:package.json": {
+   "name": "package.json",
+   "type": "config",
+   "summary": "npm manifest for react-socket-link 1.0.0: dual ESM/CJS exports for the root (React) entry and a React-free \"./core\" subpath, optional React >=18 peer dependency, and Vite/Vitest/tsc build, test and typecheck scripts."
+  },
+  "config:tsconfig.app.json": {
+   "name": "tsconfig.app.json",
+   "type": "config",
+   "summary": "Vite-template TypeScript config for application sources in src: ES2023 + DOM, bundler module resolution, react-jsx, verbatimModuleSyntax and erasableSyntaxOnly with no emit."
+  },
+  "config:tsconfig.build.json": {
+   "name": "tsconfig.build.json",
+   "type": "config",
+   "summary": "Build-only TypeScript config extending tsconfig.json that emits declaration files to dist/ for the published library sources (src/index.ts, src/core, src/react, Backoff) while excluding tests."
+  },
+  "config:tsconfig.json": {
+   "name": "tsconfig.json",
+   "type": "config",
+   "summary": "Root TypeScript configuration used for editor IntelliSense and typechecking: strict ES2020/DOM settings with bundler resolution and react-jsx, covering src, tests, examples and Vite/Vitest configs."
+  },
+  "config:tsconfig.node.json": {
+   "name": "tsconfig.node.json",
+   "type": "config",
+   "summary": "TypeScript configuration for Node-side tooling, scoped to vite.config.ts with ES2023 target, Node types and bundler resolution."
+  },
+  "file:.npmrc": {
+   "name": ".npmrc",
+   "type": "file",
+   "summary": "npm client configuration holding an authentication entry for the public npm registry, used when publishing the react-socket-link package. Contains a credential and should not be committed or shared."
+  },
+  "file:eslint.config.js": {
+   "name": "eslint.config.js",
+   "type": "file",
+   "summary": "ESLint flat config that lints all TypeScript/TSX sources with the recommended JS, typescript-eslint, React Hooks and React Refresh (Vite) rule sets using browser globals, ignoring the dist output."
+  },
+  "file:vite.config.ts": {
+   "name": "vite.config.ts",
+   "type": "file",
+   "summary": "Vite library-mode build and Vitest configuration: builds two entry points (main `index` and React-free `core`) as ES and CJS bundles with React externalized, emits type declarations via vite-plugin-dts from tsconfig.build.json, and runs tests in jsdom."
+  }
+ },
+ "totalNodes": 30,
+ "totalEdges": 164
+}

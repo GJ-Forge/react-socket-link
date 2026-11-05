@@ -1,0 +1,791 @@
+{
+ "fileNodes": [
+  {
+   "id": "file:src/client/WebsocketClient.ts",
+   "type": "file",
+   "name": "WebsocketClient.ts",
+   "filePath": "src/client/WebsocketClient.ts",
+   "summary": "Framework-agnostic, generic WebSocket client handling connection lifecycle, backoff-based reconnects, heartbeats with dead-connection detection, type-keyed pub/sub dispatch, and an offline outbound message queue.",
+   "tags": [
+    "service",
+    "websocket",
+    "reconnect",
+    "pub-sub",
+    "client"
+   ]
+  },
+  {
+   "id": "file:src/context/WebSocketProvider.tsx",
+   "type": "file",
+   "name": "WebSocketProvider.tsx",
+   "filePath": "src/context/WebSocketProvider.tsx",
+   "summary": "React context provider that lazily creates and caches named WebSocketClient instances from static connection configs or a resolve function, handling Strict Mode remounts and cleanup.",
+   "tags": [
+    "component",
+    "context",
+    "provider",
+    "react",
+    "websocket"
+   ]
+  },
+  {
+   "id": "file:src/hooks/index.ts",
+   "type": "file",
+   "name": "index.ts",
+   "filePath": "src/hooks/index.ts",
+   "summary": "Public React hooks API for accessing named WebSocket connections: retrieving clients, subscribing to message types, tracking connection state, sending, closing, and following dynamic ID-based connections.",
+   "tags": [
+    "hook",
+    "react",
+    "websocket",
+    "api",
+    "barrel"
+   ]
+  },
+  {
+   "id": "file:src/types/index.ts",
+   "type": "file",
+   "name": "index.ts",
+   "filePath": "src/types/index.ts",
+   "summary": "Shared type definitions: ConnectionState enum, generic BaseMessage, handler and unsubscribe callback types, BackoffStrategy, and WebSocketClientOptions.",
+   "tags": [
+    "type-definition",
+    "websocket",
+    "shared-types"
+   ]
+  },
+  {
+   "id": "file:src/utils/Backoff.ts",
+   "type": "file",
+   "name": "Backoff.ts",
+   "filePath": "src/utils/Backoff.ts",
+   "summary": "Reconnect delay strategies: exponential backoff with full jitter and a fixed-delay strategy, both returning BackoffStrategy functions.",
+   "tags": [
+    "utility",
+    "reconnect",
+    "backoff",
+    "factory"
+   ]
+  },
+  {
+   "id": "document:LICENSE.md",
+   "type": "document",
+   "name": "LICENSE.md",
+   "filePath": "LICENSE.md",
+   "summary": "MIT License text granting free use, modification, and distribution of react-socket-link, copyright 2026 GJForge.",
+   "tags": [
+    "documentation",
+    "license",
+    "legal"
+   ]
+  },
+  {
+   "id": "document:README.md",
+   "type": "document",
+   "name": "README.md",
+   "filePath": "README.md",
+   "summary": "Primary project documentation covering installation, quick start, typed message maps, static and dynamic provider connections, every hook (useSubscription, useSend, useConnectionState, useWebSocket, useDynamicConnection, useCloseClient), connection options, backoff strategies, the framework-agnostic client, and React Strict Mode behavior.",
+   "tags": [
+    "documentation",
+    "entry-point",
+    "overview",
+    "api-reference"
+   ]
+  },
+  {
+   "id": "config:package.json",
+   "type": "config",
+   "name": "package.json",
+   "filePath": "package.json",
+   "summary": "npm package manifest for react-socket-link v0.1.0 defining dual ESM/CJS dist exports with type declarations, Vite/Vitest/tsc scripts, React >=17 peer dependency, and build tooling devDependencies.",
+   "tags": [
+    "configuration",
+    "build-system",
+    "package-manifest",
+    "npm"
+   ]
+  },
+  {
+   "id": "config:tsconfig.app.json",
+   "type": "config",
+   "name": "tsconfig.app.json",
+   "filePath": "tsconfig.app.json",
+   "summary": "Vite-style TypeScript config for the src directory targeting ES2023 + DOM with bundler module resolution, react-jsx, verbatim module syntax, and strict unused-code linting.",
+   "tags": [
+    "configuration",
+    "typescript",
+    "build-system"
+   ]
+  },
+  {
+   "id": "config:tsconfig.build.json",
+   "type": "config",
+   "name": "tsconfig.build.json",
+   "filePath": "tsconfig.build.json",
+   "summary": "Build-only TypeScript config extending tsconfig.json to emit .d.ts declarations into dist/ from src while excluding test files, used by the build script and vite-plugin-dts.",
+   "tags": [
+    "configuration",
+    "typescript",
+    "build-system",
+    "type-declarations"
+   ]
+  },
+  {
+   "id": "config:tsconfig.json",
+   "type": "config",
+   "name": "tsconfig.json",
+   "filePath": "tsconfig.json",
+   "summary": "Root TypeScript config for editor IntelliSense and typechecking, enabling strict mode, ES2020 target, bundler resolution and react-jsx across src, tests, examples, and Vite/Vitest configs.",
+   "tags": [
+    "configuration",
+    "typescript",
+    "build-system",
+    "strict-mode"
+   ]
+  },
+  {
+   "id": "config:tsconfig.node.json",
+   "type": "config",
+   "name": "tsconfig.node.json",
+   "filePath": "tsconfig.node.json",
+   "summary": "TypeScript config for Node-side tooling files (vite.config.ts) targeting ES2023 with Node types, bundler resolution, and no emit.",
+   "tags": [
+    "configuration",
+    "typescript",
+    "tooling"
+   ]
+  },
+  {
+   "id": "file:.npmrc",
+   "type": "file",
+   "name": ".npmrc",
+   "filePath": ".npmrc",
+   "summary": "npm client configuration that sets a registry authentication token for publishing the package to registry.npmjs.org. It contains a credential and should not be committed.",
+   "tags": [
+    "configuration",
+    "npm",
+    "publishing",
+    "security"
+   ]
+  },
+  {
+   "id": "file:eslint.config.js",
+   "type": "file",
+   "name": "eslint.config.js",
+   "filePath": "eslint.config.js",
+   "summary": "ESLint flat config that lints all TypeScript/TSX sources with the recommended JS, typescript-eslint, React Hooks and React Refresh (Vite) rule sets, ignoring the dist output.",
+   "tags": [
+    "config",
+    "linting",
+    "typescript",
+    "react",
+    "build-system"
+   ]
+  },
+  {
+   "id": "file:src/index.ts",
+   "type": "file",
+   "name": "index.ts",
+   "filePath": "src/index.ts",
+   "summary": "Public package entry point for react-socket-link that re-exports the WebSocketClient core, the React provider and hooks, shared types, and backoff utilities.",
+   "tags": [
+    "entry-point",
+    "barrel",
+    "exports",
+    "public-api"
+   ]
+  },
+  {
+   "id": "file:vite.config.ts",
+   "type": "file",
+   "name": "vite.config.ts",
+   "filePath": "vite.config.ts",
+   "summary": "Vite library-mode build and Vitest configuration: builds src/index.ts into ES and CJS bundles with bundled .d.ts declarations, externalizes React, and runs tests in jsdom.",
+   "tags": [
+    "config",
+    "build-system",
+    "test",
+    "vite",
+    "library"
+   ]
+  }
+ ],
+ "importEdges": [
+  {
+   "source": "file:src/client/WebsocketClient.ts",
+   "target": "file:src/types/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/client/WebsocketClient.ts",
+   "target": "file:src/utils/Backoff.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/context/WebSocketProvider.tsx",
+   "target": "file:src/client/WebsocketClient.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/context/WebSocketProvider.tsx",
+   "target": "file:src/types/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "file:src/client/WebsocketClient.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "file:src/context/WebSocketProvider.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "file:src/types/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/utils/Backoff.ts",
+   "target": "file:src/types/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/client/WebsocketClient.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/context/WebSocketProvider.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/hooks/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/types/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/utils/Backoff.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  }
+ ],
+ "allEdges": [
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "function:src/hooks/index.ts:useWebSocket",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "function:src/hooks/index.ts:useWebSocket",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "function:src/hooks/index.ts:useSubscription",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "function:src/hooks/index.ts:useSubscription",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "function:src/hooks/index.ts:useConnectionState",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "function:src/hooks/index.ts:useConnectionState",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "function:src/hooks/index.ts:useSend",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "function:src/hooks/index.ts:useSend",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "function:src/hooks/index.ts:useCloseClient",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "function:src/hooks/index.ts:useCloseClient",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "function:src/hooks/index.ts:useDynamicConnection",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "function:src/hooks/index.ts:useDynamicConnection",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/client/WebsocketClient.ts",
+   "target": "class:src/client/WebsocketClient.ts:WebSocketClient",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/client/WebsocketClient.ts",
+   "target": "class:src/client/WebsocketClient.ts:WebSocketClient",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/context/WebSocketProvider.tsx",
+   "target": "function:src/context/WebSocketProvider.tsx:WebSocketProvider",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/context/WebSocketProvider.tsx",
+   "target": "function:src/context/WebSocketProvider.tsx:WebSocketProvider",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/context/WebSocketProvider.tsx",
+   "target": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/context/WebSocketProvider.tsx",
+   "target": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/utils/Backoff.ts",
+   "target": "function:src/utils/Backoff.ts:exponentialBackoff",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/utils/Backoff.ts",
+   "target": "function:src/utils/Backoff.ts:exponentialBackoff",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/utils/Backoff.ts",
+   "target": "function:src/utils/Backoff.ts:fixedBackoff",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:src/utils/Backoff.ts",
+   "target": "function:src/utils/Backoff.ts:fixedBackoff",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/client/WebsocketClient.ts",
+   "target": "file:src/types/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/client/WebsocketClient.ts",
+   "target": "file:src/utils/Backoff.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/context/WebSocketProvider.tsx",
+   "target": "file:src/client/WebsocketClient.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/context/WebSocketProvider.tsx",
+   "target": "file:src/types/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "file:src/client/WebsocketClient.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "file:src/context/WebSocketProvider.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/hooks/index.ts",
+   "target": "file:src/types/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/utils/Backoff.ts",
+   "target": "file:src/types/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "class:src/client/WebsocketClient.ts:WebSocketClient",
+   "target": "function:src/utils/Backoff.ts:exponentialBackoff",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:src/hooks/index.ts:useWebSocket",
+   "target": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:src/hooks/index.ts:useConnectionState",
+   "target": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:src/hooks/index.ts:useSend",
+   "target": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:src/hooks/index.ts:useCloseClient",
+   "target": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:src/hooks/index.ts:useDynamicConnection",
+   "target": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:src/hooks/index.ts:useSubscription",
+   "target": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "document:README.md",
+   "target": "file:src/index.ts",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:README.md",
+   "target": "file:src/hooks/index.ts",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:README.md",
+   "target": "file:src/context/WebSocketProvider.tsx",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:README.md",
+   "target": "file:src/client/WebsocketClient.ts",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:README.md",
+   "target": "file:src/utils/Backoff.ts",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:LICENSE.md",
+   "target": "config:package.json",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "config:package.json",
+   "target": "file:src/index.ts",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:package.json",
+   "target": "file:vite.config.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:package.json",
+   "target": "config:tsconfig.build.json",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:tsconfig.json",
+   "target": "file:src/index.ts",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:tsconfig.json",
+   "target": "file:vite.config.ts",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:tsconfig.app.json",
+   "target": "file:src/index.ts",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:tsconfig.build.json",
+   "target": "config:tsconfig.json",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:tsconfig.build.json",
+   "target": "file:src/index.ts",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:tsconfig.node.json",
+   "target": "file:vite.config.ts",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/client/WebsocketClient.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/context/WebSocketProvider.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/hooks/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/types/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/utils/Backoff.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "class:src/client/WebsocketClient.ts:WebSocketClient",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "function:src/context/WebSocketProvider.tsx:WebSocketProvider",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "function:src/hooks/index.ts:useWebSocket",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "function:src/hooks/index.ts:useSubscription",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "function:src/hooks/index.ts:useConnectionState",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "function:src/hooks/index.ts:useSend",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "function:src/hooks/index.ts:useCloseClient",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "function:src/hooks/index.ts:useDynamicConnection",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "function:src/utils/Backoff.ts:exponentialBackoff",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "function:src/utils/Backoff.ts:fixedBackoff",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:vite.config.ts",
+   "target": "file:src/index.ts",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:eslint.config.js",
+   "target": "file:src/index.ts",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  }
+ ]
+}

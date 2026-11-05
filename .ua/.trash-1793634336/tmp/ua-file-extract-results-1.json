@@ -1,0 +1,979 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 9,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 9,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 9,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "src/core/ConnectionDefinition.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 16,
+      "functions": [
+        {
+          "name": "defineSocket",
+          "startLine": 13,
+          "endLine": 18,
+          "params": [
+            "name"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "defineSocket",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "defineSocket",
+          "callee": "name.trim",
+          "lineNumber": 16
+        },
+        {
+          "caller": "defineSocket",
+          "callee": "Object.freeze",
+          "lineNumber": 17
+        },
+        {
+          "caller": "defineSocket",
+          "callee": "Symbol",
+          "lineNumber": 17
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/core/ConnectionState.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 16,
+      "functions": [
+        {
+          "name": "snapshot",
+          "startLine": 18,
+          "endLine": 20,
+          "params": [
+            "status",
+            "reconnectAttempt",
+            "lastError"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "snapshot",
+          "line": 18,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "snapshot",
+          "callee": "Object.freeze",
+          "lineNumber": 19
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/core/LogicalConnection.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 296,
+      "nonEmptyLines": 267,
+      "functions": [
+        {
+          "name": "createSocket",
+          "startLine": 292,
+          "endLine": 296,
+          "params": [
+            "definition",
+            "options"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "LogicalConnection",
+          "startLine": 29,
+          "endLine": 290,
+          "methods": [
+            "constructor",
+            "subscribe",
+            "connect",
+            "reconnect",
+            "update",
+            "close",
+            "dispose",
+            "send",
+            "whenOpen",
+            "codec",
+            "startAttempt",
+            "scheduleRetry",
+            "stopRetrying",
+            "flushQueue",
+            "isCurrent",
+            "retireTransport",
+            "clearRetry",
+            "recordError",
+            "transition",
+            "resolveWaiters",
+            "rejectWaiters"
+          ],
+          "properties": [
+            "options",
+            "transport",
+            "currentSnapshot",
+            "stateListeners",
+            "messageListeners",
+            "waiters",
+            "queue",
+            "generation",
+            "retryTimer",
+            "active",
+            "disposed",
+            "getSnapshot",
+            "subscribeState"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LogicalConnection",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "createSocket",
+          "line": 292,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "validateOptions",
+          "lineNumber": 43
+        },
+        {
+          "caller": "constructor",
+          "callee": "mergeOptions",
+          "lineNumber": 44
+        },
+        {
+          "caller": "subscribe",
+          "callee": "this.messageListeners.get",
+          "lineNumber": 57
+        },
+        {
+          "caller": "subscribe",
+          "callee": "this.messageListeners.set",
+          "lineNumber": 60
+        },
+        {
+          "caller": "subscribe",
+          "callee": "handlers.add",
+          "lineNumber": 63
+        },
+        {
+          "caller": "subscribe",
+          "callee": "handlers?.delete",
+          "lineNumber": 65
+        },
+        {
+          "caller": "subscribe",
+          "callee": "this.messageListeners.delete",
+          "lineNumber": 66
+        },
+        {
+          "caller": "connect",
+          "callee": "this.transition",
+          "lineNumber": 73
+        },
+        {
+          "caller": "connect",
+          "callee": "this.startAttempt",
+          "lineNumber": 74
+        },
+        {
+          "caller": "reconnect",
+          "callee": "this.startAttempt",
+          "lineNumber": 80
+        },
+        {
+          "caller": "update",
+          "callee": "Object.keys",
+          "lineNumber": 85
+        },
+        {
+          "caller": "update",
+          "callee": "mergeOptions",
+          "lineNumber": 86
+        },
+        {
+          "caller": "update",
+          "callee": "this.recordError",
+          "lineNumber": 88
+        },
+        {
+          "caller": "update",
+          "callee": "this.startAttempt",
+          "lineNumber": 91
+        },
+        {
+          "caller": "close",
+          "callee": "this.clearRetry",
+          "lineNumber": 98
+        },
+        {
+          "caller": "close",
+          "callee": "this.retireTransport",
+          "lineNumber": 99
+        },
+        {
+          "caller": "close",
+          "callee": "this.rejectWaiters",
+          "lineNumber": 101
+        },
+        {
+          "caller": "close",
+          "callee": "this.transition",
+          "lineNumber": 102
+        },
+        {
+          "caller": "dispose",
+          "callee": "this.close",
+          "lineNumber": 108
+        },
+        {
+          "caller": "dispose",
+          "callee": "this.messageListeners.clear",
+          "lineNumber": 110
+        },
+        {
+          "caller": "dispose",
+          "callee": "this.stateListeners.clear",
+          "lineNumber": 111
+        },
+        {
+          "caller": "send",
+          "callee": "this.codec().encode",
+          "lineNumber": 118
+        },
+        {
+          "caller": "send",
+          "callee": "this.codec",
+          "lineNumber": 118
+        },
+        {
+          "caller": "send",
+          "callee": "this.recordError",
+          "lineNumber": 119
+        },
+        {
+          "caller": "send",
+          "callee": "this.transport.send",
+          "lineNumber": 120
+        },
+        {
+          "caller": "send",
+          "callee": "this.recordError",
+          "lineNumber": 121
+        },
+        {
+          "caller": "send",
+          "callee": "this.recordError",
+          "lineNumber": 125
+        },
+        {
+          "caller": "send",
+          "callee": "this.queue.push",
+          "lineNumber": 128
+        },
+        {
+          "caller": "whenOpen",
+          "callee": "Promise.reject",
+          "lineNumber": 133
+        },
+        {
+          "caller": "whenOpen",
+          "callee": "Promise.resolve",
+          "lineNumber": 134
+        },
+        {
+          "caller": "whenOpen",
+          "callee": "Number.isFinite",
+          "lineNumber": 136
+        },
+        {
+          "caller": "whenOpen",
+          "callee": "Promise.reject",
+          "lineNumber": 137
+        },
+        {
+          "caller": "whenOpen",
+          "callee": "setTimeout",
+          "lineNumber": 141
+        },
+        {
+          "caller": "whenOpen",
+          "callee": "this.waiters.delete",
+          "lineNumber": 142
+        },
+        {
+          "caller": "whenOpen",
+          "callee": "reject",
+          "lineNumber": 143
+        },
+        {
+          "caller": "whenOpen",
+          "callee": "this.waiters.add",
+          "lineNumber": 145
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.clearRetry",
+          "lineNumber": 155
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.retireTransport",
+          "lineNumber": 156
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.transition",
+          "lineNumber": 157
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "queueMicrotask",
+          "lineNumber": 160
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.codec",
+          "lineNumber": 164
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.isCurrent",
+          "lineNumber": 166
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.transition",
+          "lineNumber": 167
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.resolveWaiters",
+          "lineNumber": 168
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.flushQueue",
+          "lineNumber": 169
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.isCurrent",
+          "lineNumber": 172
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.codec().decode",
+          "lineNumber": 174
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.codec",
+          "lineNumber": 174
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.recordError",
+          "lineNumber": 175
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.recordError",
+          "lineNumber": 178
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.messageListeners.get",
+          "lineNumber": 181
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "handler",
+          "lineNumber": 181
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.messageListeners.get",
+          "lineNumber": 182
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "handler",
+          "lineNumber": 182
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.isCurrent",
+          "lineNumber": 185
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.recordError",
+          "lineNumber": 185
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.isCurrent",
+          "lineNumber": 188
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "transport.dispose",
+          "lineNumber": 190
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.recordError",
+          "lineNumber": 191
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.scheduleRetry",
+          "lineNumber": 193
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "transport.connect",
+          "lineNumber": 198
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.isCurrent",
+          "lineNumber": 200
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "transport.dispose",
+          "lineNumber": 202
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.recordError",
+          "lineNumber": 203
+        },
+        {
+          "caller": "startAttempt",
+          "callee": "this.scheduleRetry",
+          "lineNumber": 204
+        },
+        {
+          "caller": "scheduleRetry",
+          "callee": "this.stopRetrying",
+          "lineNumber": 212
+        },
+        {
+          "caller": "scheduleRetry",
+          "callee": "this.recordError",
+          "lineNumber": 217
+        },
+        {
+          "caller": "scheduleRetry",
+          "callee": "this.stopRetrying",
+          "lineNumber": 218
+        },
+        {
+          "caller": "scheduleRetry",
+          "callee": "(this.options.reconnect?.backoff ?? exponentialBackoff())",
+          "lineNumber": 222
+        },
+        {
+          "caller": "scheduleRetry",
+          "callee": "exponentialBackoff",
+          "lineNumber": 222
+        },
+        {
+          "caller": "scheduleRetry",
+          "callee": "Number.isFinite",
+          "lineNumber": 224
+        },
+        {
+          "caller": "scheduleRetry",
+          "callee": "this.transition",
+          "lineNumber": 225
+        },
+        {
+          "caller": "scheduleRetry",
+          "callee": "setTimeout",
+          "lineNumber": 227
+        },
+        {
+          "caller": "scheduleRetry",
+          "callee": "this.startAttempt",
+          "lineNumber": 229
+        },
+        {
+          "caller": "stopRetrying",
+          "callee": "this.transition",
+          "lineNumber": 236
+        },
+        {
+          "caller": "stopRetrying",
+          "callee": "this.rejectWaiters",
+          "lineNumber": 237
+        },
+        {
+          "caller": "flushQueue",
+          "callee": "this.send",
+          "lineNumber": 242
+        },
+        {
+          "caller": "flushQueue",
+          "callee": "this.queue.shift",
+          "lineNumber": 244
+        },
+        {
+          "caller": "retireTransport",
+          "callee": "previous?.dispose",
+          "lineNumber": 255
+        },
+        {
+          "caller": "clearRetry",
+          "callee": "clearTimeout",
+          "lineNumber": 259
+        },
+        {
+          "caller": "recordError",
+          "callee": "Object.freeze",
+          "lineNumber": 264
+        },
+        {
+          "caller": "recordError",
+          "callee": "this.transition",
+          "lineNumber": 265
+        },
+        {
+          "caller": "transition",
+          "callee": "snapshot",
+          "lineNumber": 271
+        },
+        {
+          "caller": "transition",
+          "callee": "listener",
+          "lineNumber": 272
+        },
+        {
+          "caller": "resolveWaiters",
+          "callee": "clearTimeout",
+          "lineNumber": 277
+        },
+        {
+          "caller": "resolveWaiters",
+          "callee": "waiter.resolve",
+          "lineNumber": 278
+        },
+        {
+          "caller": "resolveWaiters",
+          "callee": "this.waiters.clear",
+          "lineNumber": 280
+        },
+        {
+          "caller": "rejectWaiters",
+          "callee": "clearTimeout",
+          "lineNumber": 285
+        },
+        {
+          "caller": "rejectWaiters",
+          "callee": "waiter.reject",
+          "lineNumber": 286
+        },
+        {
+          "caller": "rejectWaiters",
+          "callee": "this.waiters.clear",
+          "lineNumber": 288
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/react/SocketProvider.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 64,
+      "nonEmptyLines": 56,
+      "functions": [
+        {
+          "name": "registerSocket",
+          "startLine": 12,
+          "endLine": 16,
+          "params": [
+            "definition",
+            "options"
+          ]
+        },
+        {
+          "name": "SocketProvider",
+          "startLine": 26,
+          "endLine": 54,
+          "params": [
+            "{ connections, children }"
+          ]
+        },
+        {
+          "name": "useProviderSocket",
+          "startLine": 56,
+          "endLine": 64,
+          "params": [
+            "definition"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "registerSocket",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "SocketProvider",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "useProviderSocket",
+          "line": 56,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SocketProvider",
+          "callee": "useRef",
+          "lineNumber": 27
+        },
+        {
+          "caller": "SocketProvider",
+          "callee": "useRef",
+          "lineNumber": 28
+        },
+        {
+          "caller": "SocketProvider",
+          "callee": "registry.has",
+          "lineNumber": 32
+        },
+        {
+          "caller": "SocketProvider",
+          "callee": "registry.set",
+          "lineNumber": 33
+        },
+        {
+          "caller": "SocketProvider",
+          "callee": "createSocket",
+          "lineNumber": 33
+        },
+        {
+          "caller": "SocketProvider",
+          "callee": "useEffect",
+          "lineNumber": 38
+        },
+        {
+          "caller": "SocketProvider",
+          "callee": "registry.values",
+          "lineNumber": 41
+        },
+        {
+          "caller": "SocketProvider",
+          "callee": "socket.connect",
+          "lineNumber": 41
+        },
+        {
+          "caller": "SocketProvider",
+          "callee": "registry.values",
+          "lineNumber": 43
+        },
+        {
+          "caller": "SocketProvider",
+          "callee": "socket.close",
+          "lineNumber": 43
+        },
+        {
+          "caller": "SocketProvider",
+          "callee": "queueMicrotask",
+          "lineNumber": 44
+        },
+        {
+          "caller": "SocketProvider",
+          "callee": "registry.values",
+          "lineNumber": 47
+        },
+        {
+          "caller": "SocketProvider",
+          "callee": "socket.dispose",
+          "lineNumber": 47
+        },
+        {
+          "caller": "useProviderSocket",
+          "callee": "useContext",
+          "lineNumber": 59
+        },
+        {
+          "caller": "useProviderSocket",
+          "callee": "registry.get",
+          "lineNumber": 61
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/react/useGlobalSocket.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "functions": [
+        {
+          "name": "useGlobalSocket",
+          "startLine": 5,
+          "endLine": 9,
+          "params": [
+            "definition"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useGlobalSocket",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useGlobalSocket",
+          "callee": "useProviderSocket",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/react/useGlobalSocketController.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "functions": [
+        {
+          "name": "useGlobalSocketController",
+          "startLine": 5,
+          "endLine": 9,
+          "params": [
+            "definition"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useGlobalSocketController",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useGlobalSocketController",
+          "callee": "useProviderSocket",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/react/useSocketEvent.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 10,
+      "functions": [
+        {
+          "name": "useSocketEvent",
+          "startLine": 5,
+          "endLine": 11,
+          "params": [
+            "socket",
+            "type",
+            "handler"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useSocketEvent",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useSocketEvent",
+          "callee": "useRef",
+          "lineNumber": 8
+        },
+        {
+          "caller": "useSocketEvent",
+          "callee": "useEffect",
+          "lineNumber": 10
+        },
+        {
+          "caller": "useSocketEvent",
+          "callee": "socket.subscribe",
+          "lineNumber": 10
+        },
+        {
+          "caller": "useSocketEvent",
+          "callee": "handlerRef.current",
+          "lineNumber": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/react/useSocketSend.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "functions": [
+        {
+          "name": "useSocketSend",
+          "startLine": 5,
+          "endLine": 9,
+          "params": [
+            "socket"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useSocketSend",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useSocketSend",
+          "callee": "useCallback",
+          "lineNumber": 8
+        },
+        {
+          "caller": "useSocketSend",
+          "callee": "socket.send",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/react/useSocketState.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "useSocketState",
+          "startLine": 6,
+          "endLine": 10,
+          "params": [
+            "socket"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useSocketState",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useSocketState",
+          "callee": "useSyncExternalStore",
+          "lineNumber": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

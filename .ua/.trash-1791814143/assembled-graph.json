@@ -1,0 +1,1069 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "react-socket-link",
+    "languages": [
+      "javascript",
+      "json",
+      "markdown",
+      "typescript"
+    ],
+    "frameworks": [
+      "React",
+      "Vite",
+      "Vitest"
+    ],
+    "description": "Typed WebSocket library for React with auto-reconnect, pub/sub, and multi-connection support",
+    "analyzedAt": "2026-10-12T14:08:52.186Z",
+    "gitCommitHash": "14d367b23e540fa89737e55e133f6c50950bd56a"
+  },
+  "nodes": [
+    {
+      "id": "file:src/client/WebsocketClient.ts",
+      "type": "file",
+      "name": "WebsocketClient.ts",
+      "filePath": "src/client/WebsocketClient.ts",
+      "summary": "Framework-agnostic, generic WebSocket client handling connection lifecycle, backoff-based reconnects, heartbeats with dead-connection detection, type-keyed pub/sub dispatch, and an offline outbound message queue.",
+      "tags": [
+        "service",
+        "websocket",
+        "reconnect",
+        "pub-sub",
+        "client"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Generic class parameterized by TMessage extends BaseMessage, giving type-safe message handling without any React dependency."
+    },
+    {
+      "id": "class:src/client/WebsocketClient.ts:WebSocketClient",
+      "type": "class",
+      "name": "WebSocketClient",
+      "filePath": "src/client/WebsocketClient.ts",
+      "lineRange": [
+        25,
+        344
+      ],
+      "summary": "Core WebSocket client class exposing connect/close/send/subscribe plus state and error listeners; internally schedules reconnects, runs heartbeats, flushes queued messages, and emits state changes.",
+      "tags": [
+        "service",
+        "websocket",
+        "state-machine",
+        "pub-sub",
+        "reconnect"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/context/WebSocketProvider.tsx",
+      "type": "file",
+      "name": "WebSocketProvider.tsx",
+      "filePath": "src/context/WebSocketProvider.tsx",
+      "summary": "React context provider that lazily creates and caches named WebSocketClient instances from static connection configs or a resolve function, handling Strict Mode remounts and cleanup.",
+      "tags": [
+        "component",
+        "context",
+        "provider",
+        "react",
+        "websocket"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Uses refs to hold the client cache and latest config so the memoized context value stays stable across parent re-renders."
+    },
+    {
+      "id": "function:src/context/WebSocketProvider.tsx:WebSocketProvider",
+      "type": "function",
+      "name": "WebSocketProvider",
+      "filePath": "src/context/WebSocketProvider.tsx",
+      "lineRange": [
+        108,
+        203
+      ],
+      "summary": "Provider component managing a ref-cached map of WebSocketClient instances, lazy creation via config or resolver, error forwarding, and reconnect/close behavior across mount cycles.",
+      "tags": [
+        "component",
+        "provider",
+        "react",
+        "lifecycle"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+      "type": "function",
+      "name": "useWebSocketContext",
+      "filePath": "src/context/WebSocketProvider.tsx",
+      "lineRange": [
+        206,
+        214
+      ],
+      "summary": "Hook that reads the WebSocket context and throws if used outside a WebSocketProvider.",
+      "tags": [
+        "hook",
+        "context",
+        "react",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/hooks/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "src/hooks/index.ts",
+      "summary": "Public React hooks API for accessing named WebSocket connections: retrieving clients, subscribing to message types, tracking connection state, sending, closing, and following dynamic ID-based connections.",
+      "tags": [
+        "hook",
+        "react",
+        "websocket",
+        "api",
+        "barrel"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/hooks/index.ts:useWebSocket",
+      "type": "function",
+      "name": "useWebSocket",
+      "filePath": "src/hooks/index.ts",
+      "lineRange": [
+        12,
+        19
+      ],
+      "summary": "Returns the WebSocketClient for a named connection from the provider context.",
+      "tags": [
+        "hook",
+        "react",
+        "websocket"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/hooks/index.ts:useSubscription",
+      "type": "function",
+      "name": "useSubscription",
+      "filePath": "src/hooks/index.ts",
+      "lineRange": [
+        29,
+        59
+      ],
+      "summary": "Subscribes a handler to a message type on a named connection, keeping the latest handler in a ref and unsubscribing on unmount.",
+      "tags": [
+        "hook",
+        "react",
+        "websocket"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/hooks/index.ts:useConnectionState",
+      "type": "function",
+      "name": "useConnectionState",
+      "filePath": "src/hooks/index.ts",
+      "lineRange": [
+        66,
+        78
+      ],
+      "summary": "Tracks and returns the current ConnectionState of a named connection, re-rendering on state changes.",
+      "tags": [
+        "hook",
+        "react",
+        "websocket"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/hooks/index.ts:useSend",
+      "type": "function",
+      "name": "useSend",
+      "filePath": "src/hooks/index.ts",
+      "lineRange": [
+        86,
+        91
+      ],
+      "summary": "Returns a stable send callback bound to a named connection's client.",
+      "tags": [
+        "hook",
+        "react",
+        "websocket"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/hooks/index.ts:useCloseClient",
+      "type": "function",
+      "name": "useCloseClient",
+      "filePath": "src/hooks/index.ts",
+      "lineRange": [
+        99,
+        102
+      ],
+      "summary": "Returns a callback that closes a named connection via the provider.",
+      "tags": [
+        "hook",
+        "react",
+        "websocket"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/hooks/index.ts:useDynamicConnection",
+      "type": "function",
+      "name": "useDynamicConnection",
+      "filePath": "src/hooks/index.ts",
+      "lineRange": [
+        122,
+        155
+      ],
+      "summary": "Manages a connection that follows a changing ID, closing the previous connection and opening a new one, and returning the current connection name or null.",
+      "tags": [
+        "hook",
+        "react",
+        "websocket"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/types/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "src/types/index.ts",
+      "summary": "Shared type definitions: ConnectionState enum, generic BaseMessage, handler and unsubscribe callback types, BackoffStrategy, and WebSocketClientOptions.",
+      "tags": [
+        "type-definition",
+        "websocket",
+        "shared-types"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/utils/Backoff.ts",
+      "type": "file",
+      "name": "Backoff.ts",
+      "filePath": "src/utils/Backoff.ts",
+      "summary": "Reconnect delay strategies: exponential backoff with full jitter and a fixed-delay strategy, both returning BackoffStrategy functions.",
+      "tags": [
+        "utility",
+        "reconnect",
+        "backoff",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/utils/Backoff.ts:exponentialBackoff",
+      "type": "function",
+      "name": "exponentialBackoff",
+      "filePath": "src/utils/Backoff.ts",
+      "lineRange": [
+        13,
+        21
+      ],
+      "summary": "Creates a BackoffStrategy returning a random delay in [0, min(cap, base*2^(attempt-1))) to avoid thundering-herd reconnects.",
+      "tags": [
+        "utility",
+        "backoff",
+        "jitter",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/utils/Backoff.ts:fixedBackoff",
+      "type": "function",
+      "name": "fixedBackoff",
+      "filePath": "src/utils/Backoff.ts",
+      "lineRange": [
+        24,
+        26
+      ],
+      "summary": "Creates a BackoffStrategy that always returns the same delay.",
+      "tags": [
+        "utility",
+        "backoff",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:LICENSE.md",
+      "type": "document",
+      "name": "LICENSE.md",
+      "filePath": "LICENSE.md",
+      "summary": "MIT License text granting free use, modification, and distribution of react-socket-link, copyright 2026 GJForge.",
+      "tags": [
+        "documentation",
+        "license",
+        "legal"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "Primary project documentation covering installation, quick start, typed message maps, static and dynamic provider connections, every hook (useSubscription, useSend, useConnectionState, useWebSocket, useDynamicConnection, useCloseClient), connection options, backoff strategies, the framework-agnostic client, and React Strict Mode behavior.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview",
+        "api-reference"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "package.json",
+      "summary": "npm package manifest for react-socket-link v0.1.0 defining dual ESM/CJS dist exports with type declarations, Vite/Vitest/tsc scripts, React >=17 peer dependency, and build tooling devDependencies.",
+      "tags": [
+        "configuration",
+        "build-system",
+        "package-manifest",
+        "npm"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Uses the conditional `exports` map (types/import/require) plus `sideEffects: false` to enable tree-shaking for both ESM and CommonJS consumers."
+    },
+    {
+      "id": "config:tsconfig.app.json",
+      "type": "config",
+      "name": "tsconfig.app.json",
+      "filePath": "tsconfig.app.json",
+      "summary": "Vite-style TypeScript config for the src directory targeting ES2023 + DOM with bundler module resolution, react-jsx, verbatim module syntax, and strict unused-code linting.",
+      "tags": [
+        "configuration",
+        "typescript",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:tsconfig.build.json",
+      "type": "config",
+      "name": "tsconfig.build.json",
+      "filePath": "tsconfig.build.json",
+      "summary": "Build-only TypeScript config extending tsconfig.json to emit .d.ts declarations into dist/ from src while excluding test files, used by the build script and vite-plugin-dts.",
+      "tags": [
+        "configuration",
+        "typescript",
+        "build-system",
+        "type-declarations"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "tsconfig.json",
+      "summary": "Root TypeScript config for editor IntelliSense and typechecking, enabling strict mode, ES2020 target, bundler resolution and react-jsx across src, tests, examples, and Vite/Vitest configs.",
+      "tags": [
+        "configuration",
+        "typescript",
+        "build-system",
+        "strict-mode"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:tsconfig.node.json",
+      "type": "config",
+      "name": "tsconfig.node.json",
+      "filePath": "tsconfig.node.json",
+      "summary": "TypeScript config for Node-side tooling files (vite.config.ts) targeting ES2023 with Node types, bundler resolution, and no emit.",
+      "tags": [
+        "configuration",
+        "typescript",
+        "tooling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.npmrc",
+      "type": "file",
+      "name": ".npmrc",
+      "filePath": ".npmrc",
+      "summary": "npm client configuration that sets a registry authentication token for publishing the package to registry.npmjs.org. It contains a credential and should not be committed.",
+      "tags": [
+        "configuration",
+        "npm",
+        "publishing",
+        "security"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:eslint.config.js",
+      "type": "file",
+      "name": "eslint.config.js",
+      "filePath": "eslint.config.js",
+      "summary": "ESLint flat config that lints all TypeScript/TSX sources with the recommended JS, typescript-eslint, React Hooks and React Refresh (Vite) rule sets, ignoring the dist output.",
+      "tags": [
+        "config",
+        "linting",
+        "typescript",
+        "react",
+        "build-system"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Uses the ESLint v9 flat config API (defineConfig/globalIgnores from 'eslint/config') instead of a legacy .eslintrc."
+    },
+    {
+      "id": "file:src/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "src/index.ts",
+      "summary": "Public package entry point for react-socket-link that re-exports the WebSocketClient core, the React provider and hooks, shared types, and backoff utilities.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "exports",
+        "public-api"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Mixes value re-exports with inline 'type' modifiers so type-only exports are erased under isolatedModules/verbatimModuleSyntax."
+    },
+    {
+      "id": "file:vite.config.ts",
+      "type": "file",
+      "name": "vite.config.ts",
+      "filePath": "vite.config.ts",
+      "summary": "Vite library-mode build and Vitest configuration: builds src/index.ts into ES and CJS bundles with bundled .d.ts declarations, externalizes React, and runs tests in jsdom.",
+      "tags": [
+        "config",
+        "build-system",
+        "test",
+        "vite",
+        "library"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Imports defineConfig from 'vitest/config' so a single file configures both the Vite build and the Vitest 'test' block."
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/hooks/index.ts",
+      "target": "function:src/hooks/index.ts:useWebSocket",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/hooks/index.ts",
+      "target": "function:src/hooks/index.ts:useWebSocket",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/hooks/index.ts",
+      "target": "function:src/hooks/index.ts:useSubscription",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/hooks/index.ts",
+      "target": "function:src/hooks/index.ts:useSubscription",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/hooks/index.ts",
+      "target": "function:src/hooks/index.ts:useConnectionState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/hooks/index.ts",
+      "target": "function:src/hooks/index.ts:useConnectionState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/hooks/index.ts",
+      "target": "function:src/hooks/index.ts:useSend",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/hooks/index.ts",
+      "target": "function:src/hooks/index.ts:useSend",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/hooks/index.ts",
+      "target": "function:src/hooks/index.ts:useCloseClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/hooks/index.ts",
+      "target": "function:src/hooks/index.ts:useCloseClient",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/hooks/index.ts",
+      "target": "function:src/hooks/index.ts:useDynamicConnection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/hooks/index.ts",
+      "target": "function:src/hooks/index.ts:useDynamicConnection",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/client/WebsocketClient.ts",
+      "target": "class:src/client/WebsocketClient.ts:WebSocketClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/client/WebsocketClient.ts",
+      "target": "class:src/client/WebsocketClient.ts:WebSocketClient",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/context/WebSocketProvider.tsx",
+      "target": "function:src/context/WebSocketProvider.tsx:WebSocketProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/context/WebSocketProvider.tsx",
+      "target": "function:src/context/WebSocketProvider.tsx:WebSocketProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/context/WebSocketProvider.tsx",
+      "target": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/context/WebSocketProvider.tsx",
+      "target": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/utils/Backoff.ts",
+      "target": "function:src/utils/Backoff.ts:exponentialBackoff",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/utils/Backoff.ts",
+      "target": "function:src/utils/Backoff.ts:exponentialBackoff",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/utils/Backoff.ts",
+      "target": "function:src/utils/Backoff.ts:fixedBackoff",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/utils/Backoff.ts",
+      "target": "function:src/utils/Backoff.ts:fixedBackoff",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/client/WebsocketClient.ts",
+      "target": "file:src/types/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/client/WebsocketClient.ts",
+      "target": "file:src/utils/Backoff.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/context/WebSocketProvider.tsx",
+      "target": "file:src/client/WebsocketClient.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/context/WebSocketProvider.tsx",
+      "target": "file:src/types/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/hooks/index.ts",
+      "target": "file:src/client/WebsocketClient.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/hooks/index.ts",
+      "target": "file:src/context/WebSocketProvider.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/hooks/index.ts",
+      "target": "file:src/types/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/utils/Backoff.ts",
+      "target": "file:src/types/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:src/client/WebsocketClient.ts:WebSocketClient",
+      "target": "function:src/utils/Backoff.ts:exponentialBackoff",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/hooks/index.ts:useWebSocket",
+      "target": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/hooks/index.ts:useConnectionState",
+      "target": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/hooks/index.ts:useSend",
+      "target": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/hooks/index.ts:useCloseClient",
+      "target": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/hooks/index.ts:useDynamicConnection",
+      "target": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/hooks/index.ts:useSubscription",
+      "target": "function:src/context/WebSocketProvider.tsx:useWebSocketContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:src/index.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:src/hooks/index.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:src/context/WebSocketProvider.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:src/client/WebsocketClient.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:src/utils/Backoff.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:LICENSE.md",
+      "target": "config:package.json",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:vite.config.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "config:tsconfig.build.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:tsconfig.json",
+      "target": "file:src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:tsconfig.json",
+      "target": "file:vite.config.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:tsconfig.app.json",
+      "target": "file:src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:tsconfig.build.json",
+      "target": "config:tsconfig.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:tsconfig.build.json",
+      "target": "file:src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:tsconfig.node.json",
+      "target": "file:vite.config.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "file:src/client/WebsocketClient.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "file:src/context/WebSocketProvider.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "file:src/hooks/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "file:src/types/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "file:src/utils/Backoff.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "class:src/client/WebsocketClient.ts:WebSocketClient",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "function:src/context/WebSocketProvider.tsx:WebSocketProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "function:src/hooks/index.ts:useWebSocket",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "function:src/hooks/index.ts:useSubscription",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "function:src/hooks/index.ts:useConnectionState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "function:src/hooks/index.ts:useSend",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "function:src/hooks/index.ts:useCloseClient",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "function:src/hooks/index.ts:useDynamicConnection",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "function:src/utils/Backoff.ts:exponentialBackoff",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "function:src/utils/Backoff.ts:fixedBackoff",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:vite.config.ts",
+      "target": "file:src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:eslint.config.js",
+      "target": "file:src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:react-api",
+      "name": "React API Layer",
+      "description": "Public package entry plus the React bindings (WebSocketProvider context and the useSubscription/useSend/useConnectionState/useDynamicConnection hooks) that expose named WebSocket connections to components.",
+      "nodeIds": [
+        "file:src/index.ts",
+        "file:src/hooks/index.ts",
+        "file:src/context/WebSocketProvider.tsx"
+      ]
+    },
+    {
+      "id": "layer:core",
+      "name": "Core Client Layer",
+      "description": "Framework-agnostic WebSocketClient handling connection lifecycle, heartbeats, typed pub/sub dispatch and offline queuing, together with the exponential and fixed backoff reconnect strategies it uses.",
+      "nodeIds": [
+        "file:src/client/WebsocketClient.ts",
+        "file:src/utils/Backoff.ts"
+      ]
+    },
+    {
+      "id": "layer:types",
+      "name": "Types Layer",
+      "description": "Shared type definitions (ConnectionState, BaseMessage, handler callbacks, BackoffStrategy, WebSocketClientOptions) imported by every other source module.",
+      "nodeIds": [
+        "file:src/types/index.ts"
+      ]
+    },
+    {
+      "id": "layer:config",
+      "name": "Build & Tooling Configuration",
+      "description": "npm manifest, publish settings, TypeScript project configs, ESLint rules, and the Vite library-mode build plus Vitest setup that produce the dual ESM/CJS distribution.",
+      "nodeIds": [
+        "config:package.json",
+        "config:tsconfig.json",
+        "config:tsconfig.app.json",
+        "config:tsconfig.build.json",
+        "config:tsconfig.node.json",
+        "file:.npmrc",
+        "file:eslint.config.js",
+        "file:vite.config.ts"
+      ]
+    },
+    {
+      "id": "layer:documentation",
+      "name": "Documentation",
+      "description": "README usage guide and API reference for the provider, hooks and client, plus the MIT license.",
+      "nodeIds": [
+        "document:README.md",
+        "document:LICENSE.md"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "Project Overview",
+      "description": "Start with the README, which presents react-socket-link as a lightweight, TypeScript-first WebSocket library for React with hook-based APIs, auto-reconnect with exponential backoff, typed pub/sub messaging, and multi-connection management. It covers the quick start (wrap the app in WebSocketProvider with a connections map, then call useSubscription/useSend), static vs. dynamic connections, every hook, backoff strategies, and React Strict Mode behavior. Keep this mental map handy: the rest of the tour walks through the code behind each of these features.",
+      "nodeIds": [
+        "document:README.md"
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Public Package Entry",
+      "description": "src/index.ts is the single public surface of the package: it re-exports the WebSocketClient core, the React provider and hooks, the shared types, and the backoff utilities. It has the highest fan-out in the project, so reading its export list is the fastest way to see the library's architecture: a framework-agnostic core wrapped by a thin React layer. Every module visited in the following steps is reached directly from here.",
+      "nodeIds": [
+        "file:src/index.ts"
+      ],
+      "languageLesson": "A barrel file uses `export { ... } from './module'` and `export type { ... }` to re-export symbols, giving consumers one import path while keeping the internal file layout private. Type-only re-exports are erased at compile time and add no runtime cost."
+    },
+    {
+      "order": 3,
+      "title": "Shared Type Vocabulary",
+      "description": "Before reading any runtime code, learn the vocabulary in src/types/index.ts: the ConnectionState enum, the generic BaseMessage, handler and unsubscribe callback types, BackoffStrategy, and WebSocketClientOptions. This is the Types Layer imported by every other source module, which is why it ranks second in fan-in. BaseMessage underpins the typed messaging the README describes, where messages are discriminated by their type field so handlers receive precisely narrowed payloads.",
+      "nodeIds": [
+        "file:src/types/index.ts"
+      ],
+      "languageLesson": "Discriminated unions combine several object types that share a literal `type` field. TypeScript narrows the union when you check that field, and generics such as `Extract<TMessage, { type: K }>` let a subscription keyed by a type string receive exactly the matching message shape."
+    },
+    {
+      "order": 4,
+      "title": "Reconnect Backoff Strategies",
+      "description": "src/utils/Backoff.ts implements the BackoffStrategy type from Step 3 in two flavors: exponential backoff with full jitter, and a fixed-delay strategy. Each returns a function that computes the delay before the next reconnect attempt. Full jitter randomizes delays across the whole window so many clients that lose a server at once do not reconnect in a synchronized stampede.",
+      "nodeIds": [
+        "file:src/utils/Backoff.ts"
+      ],
+      "languageLesson": "Returning a function from a factory (a closure) lets callers configure settings such as base and max delay once, then reuse the captured values on every attempt without passing them again."
+    },
+    {
+      "order": 5,
+      "title": "Core WebSocketClient",
+      "description": "WebsocketClient.ts is the heart of the Core Client Layer: a generic, framework-agnostic client that manages connection lifecycle, reconnects using the backoff strategies from Step 4, sends heartbeats to detect dead connections, dispatches incoming messages to subscribers by message type, and queues outbound messages while disconnected so they flush on reconnect. Because it has no React dependency it can be used on its own, and the React layer in the next steps simply wraps it.",
+      "nodeIds": [
+        "file:src/client/WebsocketClient.ts"
+      ],
+      "languageLesson": "A generic class such as `WebSocketClient<TMessage extends BaseMessage>` threads one type parameter through every method, so subscribe, send and handler signatures all stay consistent with the message union the caller supplies."
+    },
+    {
+      "order": 6,
+      "title": "WebSocketProvider Context",
+      "description": "WebSocketProvider.tsx bridges the core client into React. It lazily creates and caches named WebSocketClient instances, either from a static connections map or through a resolve function for dynamic, pattern-based connections. It also handles React Strict Mode remounts and cleanup, so a development double-mount does not leave duplicate sockets behind.",
+      "nodeIds": [
+        "file:src/context/WebSocketProvider.tsx"
+      ],
+      "languageLesson": "React Context combined with a ref-held cache (for example a Map stored in useRef) is a common way to share long-lived, mutable objects such as sockets across a component tree without triggering re-renders when the cache changes."
+    },
+    {
+      "order": 7,
+      "title": "The Hooks API",
+      "description": "src/hooks/index.ts is what application components actually call: useWebSocket retrieves a named client from the provider in Step 6, useSubscription subscribes to a message type, useConnectionState tracks the ConnectionState from Step 3, useSend sends messages, useCloseClient closes a connection, and useDynamicConnection follows ID-based dynamic connections. Each hook is a thin adapter over the WebSocketClient from Step 5, turning imperative subscribe and unsubscribe calls into React-managed effects.",
+      "nodeIds": [
+        "file:src/hooks/index.ts"
+      ],
+      "languageLesson": "Custom hooks pair useEffect with a returned cleanup function: subscribing in the effect body and returning the unsubscribe callback guarantees handlers are removed when a component unmounts or its dependencies change."
+    },
+    {
+      "order": 8,
+      "title": "Packaging and Build",
+      "description": "With the source understood, see how it ships. package.json defines react-socket-link v0.1.0 with dual ESM/CJS dist exports, type declarations, and a React >=17 peer dependency. vite.config.ts builds the src/index.ts entry from Step 2 in library mode into ES and CJS bundles with bundled .d.ts files, externalizes React so the host app supplies it, and configures Vitest to run tests in jsdom.",
+      "nodeIds": [
+        "config:package.json",
+        "file:vite.config.ts"
+      ],
+      "languageLesson": "The package.json `exports` field maps `import` and `require` conditions to separate ESM and CJS files plus a `types` entry, so both module systems and TypeScript resolve the correct artifact. Declaring React as a peer dependency and marking it external in the bundler avoids shipping a second copy of React."
+    },
+    {
+      "order": 9,
+      "title": "TypeScript and Lint Tooling",
+      "description": "The TypeScript configs split responsibilities: tsconfig.json enables strict mode for editor typechecking across src, tests and examples; tsconfig.build.json extends it to emit only .d.ts declarations from src (excluding tests) for the build in Step 8; and tsconfig.node.json covers Node-side tooling like vite.config.ts. eslint.config.js applies the recommended JS, typescript-eslint and React Hooks rule sets, which help keep the hooks from Step 7 correct.",
+      "nodeIds": [
+        "config:tsconfig.json",
+        "config:tsconfig.build.json",
+        "config:tsconfig.node.json",
+        "file:eslint.config.js"
+      ],
+      "languageLesson": "TypeScript configs can inherit with `extends`, so a build-only config reuses the base compiler options while overriding `include`, `exclude` and emit settings such as declaration-only output."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "fixedSectionOk": true,
+  "nodesRecovered": 0,
+  "edgesRestored": 0,
+  "crossBatchEdgesAdded": 0,
+  "typesRemapped": 0,
+  "complexityRemapped": 0,
+  "notes": [
+    "Merge script reported no fixes and no unresolved issues; input and output counts match (27 nodes, 69 edges).",
+    "All node IDs follow <type>:<path>[:<name>] convention; all complexity values are valid (simple/moderate/complex).",
+    "No dangling edges found on re-check.",
+    "All 8 import relationships in the importMap have matching imports edges; the 5 src/index.ts barrel re-export edges are also present (13 imports edges total).",
+    ".npmrc node checked: no auth-token-like content in its node data."
+  ]
+}

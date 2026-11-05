@@ -1,0 +1,846 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 5,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 5,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "src/client/WebsocketClient.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 344,
+      "nonEmptyLines": 301,
+      "classes": [
+        {
+          "name": "WebSocketClient",
+          "startLine": 25,
+          "endLine": 344,
+          "methods": [
+            "constructor",
+            "connect",
+            "close",
+            "send",
+            "subscribe",
+            "onStateChange",
+            "onError",
+            "getState",
+            "scheduleReconnect",
+            "startHeartbeat",
+            "resetDeadConnectionTimer",
+            "stopHeartbeat",
+            "clearTimers",
+            "flushQueue",
+            "cleanupSocket",
+            "setState",
+            "emitError"
+          ],
+          "properties": [
+            "socket",
+            "state",
+            "typeHandlers",
+            "wildcardHandlers",
+            "stateHandlers",
+            "errorHandlers",
+            "reconnectAttempts",
+            "reconnectTimer",
+            "heartbeatTimer",
+            "deadConnectionTimer",
+            "sendQueue",
+            "isClosedByUser",
+            "opts",
+            "handleOpen",
+            "handleMessage",
+            "handleError",
+            "handleClose"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "WebSocketClient",
+          "line": 25,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "exponentialBackoff",
+          "lineNumber": 57
+        },
+        {
+          "caller": "constructor",
+          "callee": "JSON.stringify",
+          "lineNumber": 59
+        },
+        {
+          "caller": "constructor",
+          "callee": "JSON.parse",
+          "lineNumber": 65
+        },
+        {
+          "caller": "constructor",
+          "callee": "this.connect",
+          "lineNumber": 76
+        },
+        {
+          "caller": "connect",
+          "callee": "this.setState",
+          "lineNumber": 95
+        },
+        {
+          "caller": "connect",
+          "callee": "this.emitError",
+          "lineNumber": 101
+        },
+        {
+          "caller": "connect",
+          "callee": "String",
+          "lineNumber": 101
+        },
+        {
+          "caller": "connect",
+          "callee": "this.scheduleReconnect",
+          "lineNumber": 102
+        },
+        {
+          "caller": "connect",
+          "callee": "this.socket.addEventListener",
+          "lineNumber": 106
+        },
+        {
+          "caller": "connect",
+          "callee": "this.socket.addEventListener",
+          "lineNumber": 107
+        },
+        {
+          "caller": "connect",
+          "callee": "this.socket.addEventListener",
+          "lineNumber": 108
+        },
+        {
+          "caller": "connect",
+          "callee": "this.socket.addEventListener",
+          "lineNumber": 109
+        },
+        {
+          "caller": "close",
+          "callee": "this.clearTimers",
+          "lineNumber": 118
+        },
+        {
+          "caller": "close",
+          "callee": "this.cleanupSocket",
+          "lineNumber": 123
+        },
+        {
+          "caller": "close",
+          "callee": "this.setState",
+          "lineNumber": 124
+        },
+        {
+          "caller": "close",
+          "callee": "socket.close",
+          "lineNumber": 125
+        },
+        {
+          "caller": "close",
+          "callee": "this.setState",
+          "lineNumber": 126
+        },
+        {
+          "caller": "close",
+          "callee": "this.setState",
+          "lineNumber": 128
+        },
+        {
+          "caller": "send",
+          "callee": "this.socket.send",
+          "lineNumber": 140
+        },
+        {
+          "caller": "send",
+          "callee": "this.opts.serialize",
+          "lineNumber": 140
+        },
+        {
+          "caller": "send",
+          "callee": "this.sendQueue.shift",
+          "lineNumber": 147
+        },
+        {
+          "caller": "send",
+          "callee": "this.sendQueue.push",
+          "lineNumber": 149
+        },
+        {
+          "caller": "subscribe",
+          "callee": "this.wildcardHandlers.add",
+          "lineNumber": 166
+        },
+        {
+          "caller": "subscribe",
+          "callee": "this.wildcardHandlers.delete",
+          "lineNumber": 167
+        },
+        {
+          "caller": "subscribe",
+          "callee": "this.typeHandlers.get",
+          "lineNumber": 171
+        },
+        {
+          "caller": "subscribe",
+          "callee": "this.typeHandlers.set",
+          "lineNumber": 174
+        },
+        {
+          "caller": "subscribe",
+          "callee": "set.add",
+          "lineNumber": 176
+        },
+        {
+          "caller": "subscribe",
+          "callee": "set!.delete",
+          "lineNumber": 178
+        },
+        {
+          "caller": "subscribe",
+          "callee": "this.typeHandlers.delete",
+          "lineNumber": 179
+        },
+        {
+          "caller": "onStateChange",
+          "callee": "this.stateHandlers.add",
+          "lineNumber": 185
+        },
+        {
+          "caller": "onStateChange",
+          "callee": "handler",
+          "lineNumber": 187
+        },
+        {
+          "caller": "onStateChange",
+          "callee": "this.stateHandlers.delete",
+          "lineNumber": 188
+        },
+        {
+          "caller": "onError",
+          "callee": "this.errorHandlers.add",
+          "lineNumber": 193
+        },
+        {
+          "caller": "onError",
+          "callee": "this.errorHandlers.delete",
+          "lineNumber": 194
+        },
+        {
+          "caller": "scheduleReconnect",
+          "callee": "this.setState",
+          "lineNumber": 250
+        },
+        {
+          "caller": "scheduleReconnect",
+          "callee": "this.setState",
+          "lineNumber": 254
+        },
+        {
+          "caller": "scheduleReconnect",
+          "callee": "this.opts.backoff",
+          "lineNumber": 256
+        },
+        {
+          "caller": "scheduleReconnect",
+          "callee": "setTimeout",
+          "lineNumber": 257
+        },
+        {
+          "caller": "scheduleReconnect",
+          "callee": "this.connect",
+          "lineNumber": 259
+        },
+        {
+          "caller": "startHeartbeat",
+          "callee": "setInterval",
+          "lineNumber": 271
+        },
+        {
+          "caller": "startHeartbeat",
+          "callee": "this.opts.serialize",
+          "lineNumber": 274
+        },
+        {
+          "caller": "startHeartbeat",
+          "callee": "this.socket.send",
+          "lineNumber": 275
+        },
+        {
+          "caller": "startHeartbeat",
+          "callee": "this.resetDeadConnectionTimer",
+          "lineNumber": 281
+        },
+        {
+          "caller": "resetDeadConnectionTimer",
+          "callee": "clearTimeout",
+          "lineNumber": 289
+        },
+        {
+          "caller": "resetDeadConnectionTimer",
+          "callee": "setTimeout",
+          "lineNumber": 290
+        },
+        {
+          "caller": "resetDeadConnectionTimer",
+          "callee": "this.socket?.close",
+          "lineNumber": 292
+        },
+        {
+          "caller": "stopHeartbeat",
+          "callee": "clearInterval",
+          "lineNumber": 298
+        },
+        {
+          "caller": "stopHeartbeat",
+          "callee": "clearTimeout",
+          "lineNumber": 302
+        },
+        {
+          "caller": "clearTimers",
+          "callee": "clearTimeout",
+          "lineNumber": 309
+        },
+        {
+          "caller": "clearTimers",
+          "callee": "this.stopHeartbeat",
+          "lineNumber": 312
+        },
+        {
+          "caller": "flushQueue",
+          "callee": "this.sendQueue.shift",
+          "lineNumber": 321
+        },
+        {
+          "caller": "flushQueue",
+          "callee": "this.socket.send",
+          "lineNumber": 322
+        },
+        {
+          "caller": "flushQueue",
+          "callee": "this.opts.serialize",
+          "lineNumber": 322
+        },
+        {
+          "caller": "cleanupSocket",
+          "callee": "this.socket.removeEventListener",
+          "lineNumber": 328
+        },
+        {
+          "caller": "cleanupSocket",
+          "callee": "this.socket.removeEventListener",
+          "lineNumber": 329
+        },
+        {
+          "caller": "cleanupSocket",
+          "callee": "this.socket.removeEventListener",
+          "lineNumber": 330
+        },
+        {
+          "caller": "cleanupSocket",
+          "callee": "this.socket.removeEventListener",
+          "lineNumber": 331
+        },
+        {
+          "caller": "setState",
+          "callee": "h",
+          "lineNumber": 338
+        },
+        {
+          "caller": "emitError",
+          "callee": "h",
+          "lineNumber": 342
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/context/WebSocketProvider.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 214,
+      "nonEmptyLines": 200,
+      "functions": [
+        {
+          "name": "WebSocketProvider",
+          "startLine": 108,
+          "endLine": 203,
+          "params": [
+            "{\r\n  connections = {},\r\n  resolve,\r\n  onError,\r\n  children,\r\n}"
+          ]
+        },
+        {
+          "name": "useWebSocketContext",
+          "startLine": 206,
+          "endLine": 214,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "WebSocketProvider",
+          "line": 108,
+          "isDefault": false
+        },
+        {
+          "name": "useWebSocketContext",
+          "line": 206,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "WebSocketProvider",
+          "callee": "useRef",
+          "lineNumber": 115
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "useRef",
+          "lineNumber": 118
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "useRef",
+          "lineNumber": 124
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "useRef",
+          "lineNumber": 129
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "useMemo",
+          "lineNumber": 132
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "clientsRef.current.get",
+          "lineNumber": 135
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "configRef.current.resolve",
+          "lineNumber": 142
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "Object.keys(configRef.current.connections).join",
+          "lineNumber": 146
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "Object.keys",
+          "lineNumber": 146
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "client.onError",
+          "lineNumber": 156
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "handler",
+          "lineNumber": 156
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "clientsRef.current.set",
+          "lineNumber": 158
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "clientsRef.current.get",
+          "lineNumber": 166
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "client.close",
+          "lineNumber": 168
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "clientsRef.current.delete",
+          "lineNumber": 169
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "useEffect",
+          "lineNumber": 175
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "clients.entries",
+          "lineNumber": 180
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "toReconnectRef.current.has",
+          "lineNumber": 181
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "toReconnectRef.current.delete",
+          "lineNumber": 182
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "client.connect",
+          "lineNumber": 183
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "clients.entries",
+          "lineNumber": 187
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "client.getState",
+          "lineNumber": 188
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "toReconnectRef.current.add",
+          "lineNumber": 189
+        },
+        {
+          "caller": "WebSocketProvider",
+          "callee": "client.close",
+          "lineNumber": 190
+        },
+        {
+          "caller": "useWebSocketContext",
+          "callee": "useContext",
+          "lineNumber": 207
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/hooks/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 155,
+      "nonEmptyLines": 141,
+      "functions": [
+        {
+          "name": "useWebSocket",
+          "startLine": 12,
+          "endLine": 19,
+          "params": [
+            "name"
+          ]
+        },
+        {
+          "name": "useSubscription",
+          "startLine": 29,
+          "endLine": 59,
+          "params": [
+            "name",
+            "type",
+            "handler"
+          ]
+        },
+        {
+          "name": "useConnectionState",
+          "startLine": 66,
+          "endLine": 78,
+          "params": [
+            "name"
+          ]
+        },
+        {
+          "name": "useSend",
+          "startLine": 86,
+          "endLine": 91,
+          "params": [
+            "name"
+          ]
+        },
+        {
+          "name": "useCloseClient",
+          "startLine": 99,
+          "endLine": 102,
+          "params": []
+        },
+        {
+          "name": "useDynamicConnection",
+          "startLine": 122,
+          "endLine": 155,
+          "params": [
+            "namePrefix",
+            "id"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useWebSocket",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "useSubscription",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "useConnectionState",
+          "line": 66,
+          "isDefault": false
+        },
+        {
+          "name": "useSend",
+          "line": 86,
+          "isDefault": false
+        },
+        {
+          "name": "useCloseClient",
+          "line": 99,
+          "isDefault": false
+        },
+        {
+          "name": "useDynamicConnection",
+          "line": 122,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useWebSocket",
+          "callee": "useWebSocketContext",
+          "lineNumber": 15
+        },
+        {
+          "caller": "useWebSocket",
+          "callee": "useMemo",
+          "lineNumber": 18
+        },
+        {
+          "caller": "useWebSocket",
+          "callee": "getClient",
+          "lineNumber": 18
+        },
+        {
+          "caller": "useSubscription",
+          "callee": "useWebSocket",
+          "lineNumber": 39
+        },
+        {
+          "caller": "useSubscription",
+          "callee": "useRef",
+          "lineNumber": 43
+        },
+        {
+          "caller": "useSubscription",
+          "callee": "useEffect",
+          "lineNumber": 44
+        },
+        {
+          "caller": "useSubscription",
+          "callee": "useEffect",
+          "lineNumber": 48
+        },
+        {
+          "caller": "useSubscription",
+          "callee": "client.subscribe",
+          "lineNumber": 49
+        },
+        {
+          "caller": "useSubscription",
+          "callee": "handlerRef.current",
+          "lineNumber": 54
+        },
+        {
+          "caller": "useConnectionState",
+          "callee": "useWebSocket",
+          "lineNumber": 67
+        },
+        {
+          "caller": "useConnectionState",
+          "callee": "useState",
+          "lineNumber": 68
+        },
+        {
+          "caller": "useConnectionState",
+          "callee": "client.getState",
+          "lineNumber": 68
+        },
+        {
+          "caller": "useConnectionState",
+          "callee": "useEffect",
+          "lineNumber": 70
+        },
+        {
+          "caller": "useConnectionState",
+          "callee": "client.onStateChange",
+          "lineNumber": 73
+        },
+        {
+          "caller": "useSend",
+          "callee": "useWebSocket",
+          "lineNumber": 89
+        },
+        {
+          "caller": "useSend",
+          "callee": "useCallback",
+          "lineNumber": 90
+        },
+        {
+          "caller": "useSend",
+          "callee": "client.send",
+          "lineNumber": 90
+        },
+        {
+          "caller": "useCloseClient",
+          "callee": "useWebSocketContext",
+          "lineNumber": 100
+        },
+        {
+          "caller": "useCloseClient",
+          "callee": "useCallback",
+          "lineNumber": 101
+        },
+        {
+          "caller": "useCloseClient",
+          "callee": "closeClient",
+          "lineNumber": 101
+        },
+        {
+          "caller": "useDynamicConnection",
+          "callee": "useWebSocketContext",
+          "lineNumber": 126
+        },
+        {
+          "caller": "useDynamicConnection",
+          "callee": "useRef",
+          "lineNumber": 132
+        },
+        {
+          "caller": "useDynamicConnection",
+          "callee": "useEffect",
+          "lineNumber": 134
+        },
+        {
+          "caller": "useDynamicConnection",
+          "callee": "closeClient",
+          "lineNumber": 139
+        },
+        {
+          "caller": "useDynamicConnection",
+          "callee": "closeClient",
+          "lineNumber": 148
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 6,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/types/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 95,
+      "nonEmptyLines": 88,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/utils/Backoff.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 26,
+      "nonEmptyLines": 24,
+      "functions": [
+        {
+          "name": "exponentialBackoff",
+          "startLine": 13,
+          "endLine": 21,
+          "params": [
+            "baseMs",
+            "capMs"
+          ]
+        },
+        {
+          "name": "fixedBackoff",
+          "startLine": 24,
+          "endLine": 26,
+          "params": [
+            "delayMs"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "exponentialBackoff",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "fixedBackoff",
+          "line": 24,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "exponentialBackoff",
+          "callee": "Math.min",
+          "lineNumber": 18
+        },
+        {
+          "caller": "exponentialBackoff",
+          "callee": "Math.floor",
+          "lineNumber": 19
+        },
+        {
+          "caller": "exponentialBackoff",
+          "callee": "Math.random",
+          "lineNumber": 19
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    }
+  ]
+}

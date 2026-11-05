@@ -1,0 +1,30 @@
+{
+  "issues": [],
+  "warnings": [
+    "Node 'file:.npmrc' has no edges (orphan)"
+  ],
+  "stats": {
+    "totalNodes": 49,
+    "totalEdges": 164,
+    "totalLayers": 7,
+    "tourSteps": 11,
+    "nodeTypes": {
+      "file": 23,
+      "function": 16,
+      "class": 3,
+      "document": 2,
+      "config": 5
+    },
+    "edgeTypes": {
+      "contains": 19,
+      "exports": 37,
+      "imports": 54,
+      "calls": 9,
+      "depends_on": 5,
+      "tested_by": 19,
+      "documents": 7,
+      "related": 1,
+      "configures": 13
+    }
+  }
+}

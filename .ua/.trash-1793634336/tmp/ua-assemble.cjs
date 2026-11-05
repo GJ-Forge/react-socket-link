@@ -1,0 +1,14 @@
+const fs=require('fs');
+const I='.ua/intermediate/';
+const g=JSON.parse(fs.readFileSync(I+'assembled-graph.json','utf8'));
+const scan=JSON.parse(fs.readFileSync(I+'scan-result.json','utf8'));
+const ids=new Set(g.nodes.map(n=>n.id));
+const pfx=/^(file|config|document|service|pipeline|table|schema|resource|endpoint|function|class|module|concept):/;
+const fix=a=>(a||[]).map(x=>typeof x==='string'?x:x.id).map(x=>pfx.test(x)?x:'file:'+x).filter(x=>ids.has(x));
+let L=JSON.parse(fs.readFileSync(I+'layers.json','utf8')); if(!Array.isArray(L)) L=L.layers;
+L=L.map(l=>({id:l.id||('layer:'+l.name.toLowerCase().replace(/[^a-z0-9]+/g,'-')),name:l.name,description:l.description,nodeIds:fix(l.nodeIds||l.nodes)}));
+let T=JSON.parse(fs.readFileSync(I+'tour.json','utf8')); if(!Array.isArray(T)) T=T.steps;
+T=T.map(s=>{const o={order:s.order,title:s.title,description:s.description||s.whyItMatters,nodeIds:fix(s.nodeIds||s.nodesToInspect)}; if(s.languageLesson) o.languageLesson=s.languageLesson; return o;}).sort((a,b)=>a.order-b.order);
+const out={version:'1.0.0',project:{name:scan.name||'react-socket-link',languages:scan.languages,frameworks:scan.frameworks,description:scan.description,analyzedAt:new Date().toISOString(),gitCommitHash:'14d367b23e540fa89737e55e133f6c50950bd56a'},nodes:g.nodes,edges:g.edges,layers:L,tour:T};
+fs.writeFileSync(I+'assembled-graph.json',JSON.stringify(out,null,2));
+console.log(JSON.stringify(out.project), L.length, T.length);

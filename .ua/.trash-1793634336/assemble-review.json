@@ -1,0 +1,21 @@
+{
+  "fixedSectionOk": true,
+  "nodesRecovered": 0,
+  "edgesRestored": 0,
+  "crossBatchEdgesAdded": 0,
+  "typesRemapped": 0,
+  "complexityRemapped": 0,
+  "barrelEdgesConvertedToImports": 19,
+  "barrelReexportEdgesAdded": 18,
+  "testedByEdgesAdded": 15,
+  "notes": [
+    "Merge report had no 'Fixed' or 'Could not fix' entries: 49 nodes / 131 edges in and out, no ID, type, or complexity corrections, no dropped edges.",
+    "All 30 importMap entries are already in the graph as file->file imports edges, so no cross-batch import edges were missing.",
+    "Barrels src/index.ts and src/core/index.ts are re-export-only modules (export ... from). The scanner's importMap leaves them empty because it misses re-export statements, which is an upstream scanner gap. Checked against the source: 19 barrel depends_on edges became imports edges (weight 0.7, forward), since static re-exports are module dependencies.",
+    "Added 18 exports edges from the barrels to the runtime symbol nodes they re-export (defineSocket, createSocket, LogicalConnection, SocketProvider, registerSocket, the use* hooks, exponentialBackoff, fixedBackoff). Type-only re-exports have no nodes and were skipped. ReconnectionPolicy.ts is re-exported only as a type, so it keeps an imports edge but gets no exports edge.",
+    "Added 15 production->test tested_by edges (weight 0.5) for modules whose runtime symbols the tests import by name through the barrels. core.test.ts covers LogicalConnection, ConnectionDefinition, Backoff. react.test.tsx covers ConnectionDefinition, SocketProvider, useGlobalSocket, useGlobalSocketController, useLocalSocket, useSocketEvent, useSocketState. types.test.ts covers LogicalConnection, ConnectionDefinition, SocketProvider. Each source node was tagged 'tested'. The existing barrel tested_by edges were kept.",
+    "WebSocketTransport.ts -> core.test.ts and react.test.tsx tested_by edges were added because both tests call vi.stubGlobal('WebSocket', MockWebSocket), and WebSocketTransport calls new WebSocket(...). Coverage is indirect, through createSocket and the hooks. MockWebSocket.ts is a test helper, not a production module, so it gets no tested_by edges.",
+    "useSocketSend.ts is re-exported but no test imports it, so it has no tested_by edge. This may be a real coverage gap.",
+    "The .npmrc node's summary and tags contain no credential material, and a regex scan of the whole graph found no token patterns. The node has no edges."
+  ]
+}

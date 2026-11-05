@@ -1,0 +1,327 @@
+{
+ "nodes": [
+  {
+   "id": "file:src/core/index.ts",
+   "type": "file",
+   "name": "index.ts",
+   "filePath": "src/core/index.ts",
+   "summary": "React-free '/core' entry point barrel that re-exports socket definitions, the LogicalConnection/createSocket API, option and state types, and backoff helpers for standalone TypeScript use.",
+   "tags": [
+    "entry-point",
+    "barrel",
+    "public-api",
+    "type-definition"
+   ],
+   "complexity": "simple",
+   "languageNotes": "Uses inline `type` modifiers in re-export lists so type-only symbols are erased under isolatedModules."
+  },
+  {
+   "id": "file:src/index.ts",
+   "type": "file",
+   "name": "index.ts",
+   "filePath": "src/index.ts",
+   "summary": "Main package entry point that re-exports the full public API: core connection primitives and types plus the React SocketProvider, registerSocket, and socket hooks.",
+   "tags": [
+    "entry-point",
+    "barrel",
+    "public-api",
+    "react"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:tests/core.test.ts",
+   "type": "file",
+   "name": "core.test.ts",
+   "filePath": "tests/core.test.ts",
+   "summary": "Vitest suite for LogicalConnection behavior: identity preservation across transport replacement, update coalescing, reconnection/backoff, queue bounding and flushing, readiness waits, update validation with credential redaction, heartbeats, and codec rejection.",
+   "tags": [
+    "test",
+    "websocket",
+    "reconnection",
+    "vitest"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:tests/helpers/MockWebSocket.ts",
+   "type": "file",
+   "name": "MockWebSocket.ts",
+   "filePath": "tests/helpers/MockWebSocket.ts",
+   "summary": "Test double for the browser WebSocket built on EventTarget, tracking created instances, sent payloads and close calls, with helpers to simulate open, message and abnormal close events.",
+   "tags": [
+    "test",
+    "mock",
+    "websocket",
+    "test-helper"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:tests/helpers/MockWebSocket.ts:MockWebSocket",
+   "type": "class",
+   "name": "MockWebSocket",
+   "filePath": "tests/helpers/MockWebSocket.ts",
+   "lineRange": [
+    1,
+    37
+   ],
+   "summary": "EventTarget-based fake WebSocket stubbed globally in tests; records every instance and sent message and exposes open(), message(), and fail() to drive transport lifecycle events.",
+   "tags": [
+    "mock",
+    "test-helper",
+    "websocket",
+    "event-handler"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:tests/react.test.tsx",
+   "type": "file",
+   "name": "react.test.tsx",
+   "filePath": "tests/react.test.tsx",
+   "summary": "React integration tests verifying global sockets start without consumers and share one controller, local socket identity across re-renders and key changes, Strict Mode effect replay safety, and independent connections per hook owner.",
+   "tags": [
+    "test",
+    "react",
+    "hook",
+    "websocket"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:tests/types.test.ts",
+   "type": "file",
+   "name": "types.test.ts",
+   "filePath": "tests/types.test.ts",
+   "summary": "Compile-time type tests using expectTypeOf and @ts-expect-error to ensure socket definitions bind incoming/outgoing message types, narrow subscribed events, and reject mismatched codecs or sends.",
+   "tags": [
+    "test",
+    "type-safety",
+    "type-definition",
+    "vitest"
+   ],
+   "complexity": "simple",
+   "languageNotes": "Relies on `@ts-expect-error` inside dead `if (false)` branches so invalid calls are type-checked but never executed."
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:tests/core.test.ts",
+   "target": "file:src/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:tests/core.test.ts",
+   "target": "file:tests/helpers/MockWebSocket.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:tests/react.test.tsx",
+   "target": "file:src/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:tests/react.test.tsx",
+   "target": "file:tests/helpers/MockWebSocket.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:tests/types.test.ts",
+   "target": "file:src/core/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:tests/types.test.ts",
+   "target": "file:src/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:tests/helpers/MockWebSocket.ts",
+   "target": "class:tests/helpers/MockWebSocket.ts:MockWebSocket",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:tests/helpers/MockWebSocket.ts",
+   "target": "class:tests/helpers/MockWebSocket.ts:MockWebSocket",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:src/core/index.ts",
+   "target": "file:src/core/ConnectionDefinition.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/core/ConnectionDefinition.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/core/index.ts",
+   "target": "file:src/core/LogicalConnection.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/core/LogicalConnection.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/core/index.ts",
+   "target": "file:src/core/ConnectionOptions.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/core/ConnectionOptions.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/core/index.ts",
+   "target": "file:src/core/ConnectionState.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/core/ConnectionState.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/core/index.ts",
+   "target": "file:src/core/ReconnectionPolicy.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/core/ReconnectionPolicy.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/core/index.ts",
+   "target": "file:src/utils/Backoff.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/utils/Backoff.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/react/SocketProvider.tsx",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/react/useGlobalSocket.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/react/useGlobalSocketController.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/react/useLocalSocket.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/react/useSocketState.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/react/useSocketEvent.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:src/react/useSocketSend.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:tests/core.test.ts",
+   "type": "tested_by",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:tests/react.test.tsx",
+   "type": "tested_by",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:src/index.ts",
+   "target": "file:tests/types.test.ts",
+   "type": "tested_by",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:src/core/index.ts",
+   "target": "file:tests/types.test.ts",
+   "type": "tested_by",
+   "direction": "forward",
+   "weight": 0.5
+  }
+ ]
+}
